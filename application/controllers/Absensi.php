@@ -9,7 +9,7 @@ use application\eloquents\Karyawan as Karyawan_model;
 class Absensi extends CI_Controller {
 	public function index()
 	{
-		$karyawan = Karyawan_model::with('absensis')->find(10);
+		$karyawan = Karyawan_model::with('absensisToday')->find(10);
 
 		return blade('absensi.index', compact(['karyawan']));
 	}

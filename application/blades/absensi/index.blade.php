@@ -1,3 +1,8 @@
+@php
+$absensisToday = $karyawan->absensisToday;
+$countAbsensisToday = count($absensisToday);
+@endphp
+
 @extends('template.template')
 
 @section('title')
@@ -95,6 +100,33 @@ Absensi
                                 <label for="textwaktu">Waktu</label>
                                 <input type="text" name="textwaktu" class="form-control" id="textwaktu" readonly placeholder="" value="">
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" name="tipe" value="" id="tipe">
+                                <label for="texttipe">Tipe</label>
+                                @php
+                                if ($countAbsensisToday == 0) {
+                                    $value = "Berangkat";
+                                } elseif ($countAbsensisToday == 1) {
+                                    $value = "Pulang";
+                                } else {
+                                    $value = "#N/A";
+                                }
+                                @endphp
+                                <input type="text" name="texttipe" class="form-control" id="texttipe" readonly value="{{$value}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                        <div>
+                            <label for="foto">Foto</label>
+                            <input type="file" name="foto" class="form-control" id="foto">
                         </div>
                     </div>
 
