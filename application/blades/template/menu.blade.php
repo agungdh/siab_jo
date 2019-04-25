@@ -1,5 +1,11 @@
 <li>
-  <a href="{{ base_url() }}">
-    <i class="fa fa-calendar-check-o"></i> <span>Pemakaian</span>
+  <a href="{{ base_url() }}absensi">
+    <i class="fa fa-users"></i> <span>Absensi</span>
+  </a>
+</li>
+
+<li>
+  <a href="{{ base_url() }}karyawan">
+    <i class="fa fa-users"></i> <span>Karyawan</span>
   </a>
 </li>

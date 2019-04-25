@@ -60,6 +60,20 @@
   </style>
 
   @yield('css')
+
+  <script type="text/javascript">
+    var state = {
+      config: {
+
+      }, 
+      data: {
+
+      }, 
+      function: {
+
+      }, 
+    }
+  </script>
 </head>
 <body class="hold-transition skin-blue fixed sidebar-mini">
 <!-- Site wrapper -->
@@ -232,6 +246,12 @@ function momentParseToDate(momentObject) {
 }
 function momentParseToDateTime(momentObject) {
   return momentParse(momentObject, 'YYYY-MM-DD HH:mm:ss');
+}
+function momentParseToDateIndo(momentObject) {
+  return momentParse(momentObject, 'DD-MM-YYYY');
+}
+function momentParseToDateTimeIndo(momentObject) {
+  return momentParse(momentObject, 'DD-MM-YYYY HH:mm:ss');
 }
 function getDateTimePickerValue(id) {
   return momentParseToDateTime($("#" + id).data("DateTimePicker").date());
