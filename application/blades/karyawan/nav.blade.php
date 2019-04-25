@@ -1,0 +1,1 @@
+<li><a href="{{ base_url() }}karyawan"><i class="fa fa-home"></i> Karyawan</a></li>
