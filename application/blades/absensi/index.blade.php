@@ -21,7 +21,7 @@ Absensi
                 <h3 class="box-title">Absensi</h3>
             </div>
 
-            <form action="{{base_url()}}absensi/absen" method="post" role="form">
+            <form action="{{base_url()}}absensi/absen" method="post" role="form" enctype="multipart/form-data">
                 <div class="box-body">
 
                     <!-- Markers -->
@@ -148,23 +148,45 @@ Absensi
 $("form").submit(function(e) {
     e.preventDefault();
 
+    @if($countAbsensisToday > 1)
+    swal('Error', 'Anda tidak bisa absen lagi !!!', 'error');
+
+    return false;
+    @endif
+
     cekDilokasiApaEnggak();
 
     if ($("#lat").val() == '') {
         swal('Error', 'Data Latitude Tidak Ada !!!', 'error');
+
+        return false;
     }
 
     if ($("#lng").val() == '') {
         swal('Error', 'Data Longitude Tidak Ada !!!', 'error');
+
+        return false;
     }
 
     if ($("#lokasi").val() == '') {
         swal('Error', 'Data Lokasi Tidak Ada !!!', 'error');
+
+        return false;
     }
 
     if ($("#tipe").val() == '') {
         swal('Error', 'Data Tipe Tidak Ada !!!', 'error');
+
+        return false;
     }
+
+    if ($("#foto").val() == '') {
+        swal('Error', 'Data Foto Tidak Ada !!!', 'error');
+
+        return false;
+    }
+
+    $("form").unbind("submit").submit();
 })
 
 $(function() {

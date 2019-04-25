@@ -51,6 +51,15 @@ class Absensi extends CI_Controller {
 
 		move_uploaded_file($foto['tmp_name'], 'uploads/fotoabsen/' . $id);
 
-		dd($requestData);
+		$this->session->set_flashdata(
+			'alert',
+			[
+				'title' => 'Sukses',
+				'message' => 'Anda berhasil absen !!!',
+				'class' => 'success',
+			]
+		);
+
+		redirect(base_url('absensi'));
 	}
 }
