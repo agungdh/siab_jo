@@ -21,7 +21,7 @@ Absensi
                 <h3 class="box-title">Absensi</h3>
             </div>
 
-            <form action="{{base_url()}}absensi/aksitambah" method="post" role="form">
+            <form action="{{base_url()}}absensi/absen" method="post" role="form">
                 <div class="box-body">
 
                     <!-- Markers -->
@@ -106,7 +106,6 @@ Absensi
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <div class="form-group">
                             <div>
-                                <input type="hidden" name="tipe" value="" id="tipe">
                                 <label for="texttipe">Tipe</label>
                                 @php
                                 if ($countAbsensisToday == 0) {
@@ -146,6 +145,28 @@ Absensi
 
 @section('js')
 <script type="text/javascript">
+$("form").submit(function(e) {
+    e.preventDefault();
+
+    cekDilokasiApaEnggak();
+
+    if ($("#lat").val() == '') {
+        swal('Error', 'Data Latitude Tidak Ada !!!', 'error');
+    }
+
+    if ($("#lng").val() == '') {
+        swal('Error', 'Data Longitude Tidak Ada !!!', 'error');
+    }
+
+    if ($("#lokasi").val() == '') {
+        swal('Error', 'Data Lokasi Tidak Ada !!!', 'error');
+    }
+
+    if ($("#tipe").val() == '') {
+        swal('Error', 'Data Tipe Tidak Ada !!!', 'error');
+    }
+})
+
 $(function() {
     getLocation();
 
