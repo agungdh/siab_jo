@@ -4,18 +4,19 @@ require_once('vendor/autoload.php');
 use splitbrain\phpcli\CLI;
 use splitbrain\phpcli\Options;
 use Ifsnop\Mysqldump as IMysqldump;
+use Thamaraiselvam\MysqlImport\Import;
+use agungdh\Pustaka;
 
 class arisan extends CLI
 {
-    // register options and arguments
     protected function setup(Options $options)
     {
-        $options->setHelp('Laravel artisan like. but this is "arisan"');
-        $options->registerOption('version', 'print version', 'v');
-        $options->registerOption('dumpdb', 'Dump the Database', 'd');
+        $options->setHelp('Laravel artisan like. but this is "arisan".');
+        $options->registerOption('version', 'print version.', 'v');
+        $options->registerOption('dumpdb', 'Dump the Database.', 'd');
+        $options->registerOption('importdb', 'Import Database with SQL Syntax. Run the db.sql file.', 'i');
     }
 
-    // implement your code
     protected function main(Options $options)
     {
         if ($options->getOpt('version'))
@@ -38,7 +39,7 @@ class arisan extends CLI
                 "Password\t: " . $pass . "\n"
             );
 
-            $path = './' . 'db.sql';
+            $path = './db.sql';
             $this->notice("Set dumping path to " . $path . "\n");
             
             $this->notice("Dumping the database\n");
@@ -54,6 +55,25 @@ class arisan extends CLI
             }
         }
         
+        elseif ($options->getOpt('importdb'))
+        {
+            $this->info("Preparing ...\n");
+            $database = env('DB_DB');
+            $user = env('DB_USER');
+            $pass = env('DB_PASS');
+            $host = env('DB_HOST');
+
+            $this->info("Drop all tables");
+            Pustaka::dropTableView($host, $user, $pass, $database);
+
+            $location = './db.sql';
+            $this->info("Importing Database");
+
+            new Import($location, $user, $pass, $database, $host);
+            
+            $this->info("Done ...");
+        }
+
         else
         {
             echo $options->help();

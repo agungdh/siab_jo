@@ -29,6 +29,10 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
         array (
             'Whoops\\' => 7,
         ),
+        'T' => 
+        array (
+            'Thamaraiselvam\\MysqlImport\\' => 27,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php72\\' => 23,
@@ -108,6 +112,10 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
         'Whoops\\' => 
         array (
             0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
+        ),
+        'Thamaraiselvam\\MysqlImport\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/thamaraiselvam/mysql-import',
         ),
         'Symfony\\Polyfill\\Php72\\' => 
         array (

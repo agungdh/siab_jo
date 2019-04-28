@@ -10,6 +10,7 @@ return array(
     'application\\' => array($baseDir . '/application'),
     'agungdh\\' => array($vendorDir . '/agungdh/pustaka/src'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
+    'Thamaraiselvam\\MysqlImport\\' => array($vendorDir . '/thamaraiselvam/mysql-import'),
     'Symfony\\Polyfill\\Php72\\' => array($vendorDir . '/symfony/polyfill-php72'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
