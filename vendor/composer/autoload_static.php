@@ -70,6 +70,7 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
+            'Ifsnop\\' => 7,
         ),
         'G' => 
         array (
@@ -227,6 +228,10 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
         'Illuminate\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
+        'Ifsnop\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ifsnop/mysqldump-php/src/Ifsnop',
         ),
         'Gumlet\\' => 
         array (
