@@ -1,7 +1,7 @@
 @php
-// if(session('login')) {
-//   $userData = ADHhelper::getUserData();
-// }
+if(ci()->session->login) {
+  $userData = getUserData();
+}
 @endphp
 
 <!DOCTYPE html>
@@ -103,8 +103,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{base_url()}}assets/favicon/cbfjg-rsl5i.png" class="user-image" alt="User Image">
-              {{-- <span class="hidden-xs">{{$userData->pegawai ? $userData->pegawai->nama : $userData->username}}</span> --}}
-              <span class="hidden-xs">test aja</span>
+              <span class="hidden-xs">{{$userData->karyawan ? $userData->karyawan->nama : $userData->username}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -112,10 +111,8 @@
                 <img src="{{base_url()}}assets/favicon/cbfjg-rsl5i.png" class="img-circle" alt="User Image">
 
                 <p>
-                  {{-- @if(session('login'))
-                    {{$userData->pegawai ? $userData->pegawai->nama : $userData->username}}
+                    {{$userData->karyawan ? $userData->karyawan->nama : $userData->username}}
                     <small>{{$userData->username}}</small>
-                  @endif --}}
                 </p>
               </li>
               <!-- Menu Footer-->

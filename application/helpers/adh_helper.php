@@ -1,6 +1,9 @@
 <?php
 
 use Jenssegers\Blade\Blade;
+use JeffOchoa\ValidatorFactory;
+use Illuminate\Database\Capsule\Manager as DB;
+use application\eloquents\User;
 
 if (!function_exists('blade')) {
     function blade($view, $data = [])
@@ -24,7 +27,14 @@ if (!function_exists('ci')) {
 if (!function_exists('validator')) {
     function validator()
     {
-        $factory = new JeffOchoa\ValidatorFactory();
+        $factory = new ValidatorFactory();
         return $factory;
+    }
+ }
+
+if (!function_exists('getUserData')) {
+    function getUserData()
+    {
+        return User::find(ci()->session->userID);
     }
  }
