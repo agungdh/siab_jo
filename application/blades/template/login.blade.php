@@ -39,7 +39,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">{{getenv('APP_TITLE')}}</p>
 
-    <form action="{{base_url()}}login/action" method="post">
+    <form action="{{base_url()}}log/in" method="post">
       @php
       if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('username')) {
         $class = 'form-group has-feedback has-error';

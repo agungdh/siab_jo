@@ -7,6 +7,10 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		return blade('template.template');
+		if ($this->session->login) {
+			return blade('template.template');
+		} else {
+			return blade('template.login');
+		}
 	}
 }
