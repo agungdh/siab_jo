@@ -115,6 +115,20 @@ class User extends CI_Controller {
 
 	public function aksihapus($id)
 	{
+
+		if ($this->session->userID == $id) {
+			$this->session->set_flashdata(
+				'alert',
+				[
+					'title' => 'ERROR !!!',
+					'message' => 'Tidak Dapat Menghapus User Sendiri !!!',
+					'class' => 'error',
+				]
+			);
+
+			redirect(base_url('user'));
+		}
+
 		try {
 			User_model::where('id', $id)->delete();
 		} catch (QueryException $exception) {

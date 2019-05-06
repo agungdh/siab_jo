@@ -18,7 +18,7 @@ class Log extends CI_Controller {
 
 		if ($validator->passes()) {
 			$Karyawan = Karyawan_model::where(['nip' => $requestData['nip']])->first();
-			if (!($Karyawan && password_verify($requestData['password'], $Karyawan->user->password))) {
+			if (!($Karyawan && $Karyawan->user && password_verify($requestData['password'], $Karyawan->user->password))) {
 				$validator->errors()->add('nip', 'NIP / Password Salah !!!');
 				$validator->errors()->add('password', 'NIP / Password Salah !!!');
 			}
