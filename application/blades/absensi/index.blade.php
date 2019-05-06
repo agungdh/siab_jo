@@ -224,17 +224,17 @@ var updateWaktu = function () {
     });
 
     state.data.polygonCoords = [
-        new google.maps.LatLng(-5.093137,105.283660),
-        new google.maps.LatLng(-5.093105,105.283996),
-        new google.maps.LatLng(-5.093124,105.284159),
-        new google.maps.LatLng(-5.093268,105.284291),
-        new google.maps.LatLng(-5.093431,105.284258),
-        new google.maps.LatLng(-5.093565,105.284146),
-        new google.maps.LatLng(-5.093653,105.283816),
-        new google.maps.LatLng(-5.093618,105.283658),
-        new google.maps.LatLng(-5.093589,105.283497),
-        new google.maps.LatLng(-5.093471,105.283400),
-        new google.maps.LatLng(-5.093225,105.283513)
+        new google.maps.LatLng(-5.344849,105.004231),
+        new google.maps.LatLng(-5.344999,105.004140),
+        new google.maps.LatLng(-5.345383,105.004129),
+        new google.maps.LatLng(-5.345501,105.004204),
+        new google.maps.LatLng(-5.345656,105.004413),
+        new google.maps.LatLng(-5.345720,105.004789),
+        new google.maps.LatLng(-5.345693,105.005197),
+        new google.maps.LatLng(-5.345437,105.005309),
+        new google.maps.LatLng(-5.345095,105.005374),
+        new google.maps.LatLng(-5.344903,105.005304),
+        new google.maps.LatLng(-5.344823,105.005213)
     ];
     state.data.polygon = new google.maps.Polygon({
       paths: state.data.polygonCoords,
