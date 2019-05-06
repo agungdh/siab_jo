@@ -12,7 +12,7 @@ Dashboard
 <div class="row">
 
     <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box bg-green">
+      <div class="info-box bg-aqua">
         <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
 
         <div class="info-box-content">
@@ -84,9 +84,9 @@ Dashboard
                 		<td>{{helper()->tanggalWaktuIndo($item->waktu)}}</td>
                         <td>{{$item->tipe == 'b' ? 'Berangkat' : 'Pulang'}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}')">
-                                <i class="glyphicon glyphicon-trash"></i>
-                                Hapus
+                            <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}')">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                                Detail
                             </button>
                         </td>
                 	</tr>
