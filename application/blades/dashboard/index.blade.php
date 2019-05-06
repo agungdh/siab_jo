@@ -10,6 +10,59 @@ Dashboard
 
 @section('content')
 <div class="row">
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box bg-green">
+        <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Waktu Saat Ini</span>
+          <span class="info-box-number" id="valWaktuSaatIni"></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box bg-green">
+        <span class="info-box-icon"><i class="fa fa-sign-in"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Berangkat</span>
+          <span class="info-box-number">{{$absensisTodayBerangkat ? helper()->tanggalWaktuIndo($absensisTodayBerangkat->waktu) : null}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box bg-orange">
+        <span class="info-box-icon"><i class="fa fa-sign-out"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Pulang</span>
+          <span class="info-box-number">{{$absensisTodayPulang ? helper()->tanggalWaktuIndo($absensisTodayPulang->waktu) : null}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box bg-red">
+        <span class="info-box-icon"><i class="fa fa-window-close"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Absen</span>
+          <span class="info-box-number">{{helper()->ribuan(123123)}}X</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+
 	<div class="col-md-12">
 		<div class="box box-primary">
             <div class="box-header">
@@ -84,5 +137,16 @@ Dashboard
 
         $("#modalKu").modal();
     }
+
+    var updateWaktu = function () {
+        var date = moment(new Date());
+
+        $("#valWaktuSaatIni").html(momentParseToDateTimeIndo(date));
+    };
+
+    $(function() {
+        updateWaktu();
+        setInterval(updateWaktu, 1000);
+    });
 </script>
 @endsection

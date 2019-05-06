@@ -11,8 +11,11 @@ class Welcome extends CI_Controller {
 			$user = getUserData();
 			$karyawan = $user->karyawan;
 			$absensis = $karyawan->absensis;
-
-			return blade('dashboard.index', compact(['user', 'karyawan', 'absensis']));
+			$absensisToday = $karyawan->absensisToday;
+			$absensisTodayBerangkat = $karyawan->absensisTodayBerangkat;
+			$absensisTodayPulang = $karyawan->absensisTodayPulang;
+			
+			return blade('dashboard.index', compact(['user', 'karyawan', 'absensis', 'absensisToday', 'absensisTodayBerangkat', 'absensisTodayPulang']));
 		} else {
 			return blade('template.login');
 		}

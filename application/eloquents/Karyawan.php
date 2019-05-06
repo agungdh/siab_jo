@@ -18,4 +18,12 @@ class Karyawan extends Eloquent {
     public function absensisToday(){
     	return $this->hasMany('application\eloquents\Absensi', 'id_karyawan')->whereRaw('day(waktu) = day(now())');
     }
+   
+    public function absensisTodayBerangkat(){
+        return $this->hasOne('application\eloquents\Absensi', 'id_karyawan')->whereRaw('day(waktu) = day(now())')->where('tipe', 'b');
+    }
+
+    public function absensisTodayPulang(){
+        return $this->hasOne('application\eloquents\Absensi', 'id_karyawan')->whereRaw('day(waktu) = day(now())')->where('tipe', 'p');
+    }
 }
