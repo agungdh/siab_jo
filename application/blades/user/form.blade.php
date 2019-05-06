@@ -20,10 +20,10 @@
 	<div class="{{$class}}">
 		<label for="id_karyawan" data-toggle="tooltip" title="{{$message}}">Karyawan</label>
 		<div data-toggle="tooltip" title="{{$message}}">
-			<select class="form-control select2">
-				<option>Pilih karyawan</option>
-				@foreach($karyawans as $karyawan)
-				<option value="{{$karyawan->id}}">{{$karyawan->nip}} - {{$karyawan->nama}}</option>
+			<select class="form-control select2" name="id_karyawan">
+				<option {{$value == '' ? 'selected' : null}} value="">Pilih karyawan</option>
+				@foreach($karyawans as $item)
+				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{$item->nip}} - {{$item->nama}}</option>
 				@endforeach
 			</select>
 		</div>
@@ -49,10 +49,10 @@
 	<div class="{{$class}}">
 		<label for="level" data-toggle="tooltip" title="{{$message}}">level</label>
 		<div data-toggle="tooltip" title="{{$message}}">
-			<select class="form-control select2">
-				<option>Pilih Level</option>
-				<option>Admin</option>
-				<option>Karyawan</option>
+			<select class="form-control select2" name="level">
+				<option {{$value == '' ? 'selected' : null}} value="">Pilih Level</option>
+				<option {{$value == 'a' ? 'selected' : null}} value="a">Admin</option>
+				<option {{$value == 'k' ? 'selected' : null}} value="k">Karyawan</option>
 			</select>
 		</div>
 	</div>
@@ -65,43 +65,27 @@
 		$class = 'form-group has-feedback';
 		$message = '';
 	}
-
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['password']) {
-		$value = ci()->session->flashdata('old')['password'];
-	} elseif (isset($karyawan) && $karyawan['password']) {
-		$value = $karyawan['password'];
-	} else {
-		$value = '';
-	}
 	@endphp
 	<div class="{{$class}}">
 		<label for="password" data-toggle="tooltip" title="{{$message}}">Password</label>
 		<div data-toggle="tooltip" title="{{$message}}">
-			<input type="text" name="password" class="form-control" placeholder="Isi Password" id="password" value="{{$value}}">
+			<input type="password" name="password" class="form-control" placeholder="Isi Password" id="password">
 		</div>
 	</div>
 
 	@php
-	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('password_confirmation')) {
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('password')) {
 		$class = 'form-group has-feedback has-error';
-		$message = ci()->session->flashdata('errors')->first('password_confirmation');
+		$message = ci()->session->flashdata('errors')->first('password');
 	} else {
 		$class = 'form-group has-feedback';
 		$message = '';
-	}
-
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['password_confirmation']) {
-		$value = ci()->session->flashdata('old')['password_confirmation'];
-	} elseif (isset($karyawan) && $karyawan['password_confirmation']) {
-		$value = $karyawan['password_confirmation'];
-	} else {
-		$value = '';
 	}
 	@endphp
 	<div class="{{$class}}">
 		<label for="password_confirmation" data-toggle="tooltip" title="{{$message}}">Ulangi Password</label>
 		<div data-toggle="tooltip" title="{{$message}}">
-			<input type="text" name="password_confirmation" class="form-control" placeholder="Isi Ulangi Password" id="password_confirmation" value="{{$value}}">
+			<input type="password" name="password_confirmation" class="form-control" placeholder="Isi Ulangi Password" id="password_confirmation">
 		</div>
 	</div>
 	

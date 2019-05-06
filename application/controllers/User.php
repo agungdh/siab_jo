@@ -28,20 +28,25 @@ class User extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'nip' => 'required',
-			'nama' => 'required',
+			'id_karyawan' => 'required',
+			'level' => 'required',
+			'password' => 'required|confirmed',
 		]);
 
-		if (Karyawan_model::where(['nip' => $requestData['nip']])->first()) {
-			$validator->errors()->add('nip', 'NIP sudah ada !!!');
+		if (User_model::where(['id_karyawan' => $requestData['id_karyawan']])->first()) {
+			$validator->errors()->add('id_karyawan', 'User sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
 			
-			redirect(base_url('karyawan/tambah'));
+			redirect(base_url('user/tambah'));
 		}
+
+		unset($requestData['password_confirmation']);
+		$requestData['password'] = password_hash($requestData['password'], PASSWORD_BCRYPT);
+		dd($requestData);
 
 		Karyawan_model::insert($requestData);
 		
