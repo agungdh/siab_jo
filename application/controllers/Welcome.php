@@ -8,7 +8,11 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		if ($this->session->login) {
-			return blade('template.template');
+			$user = getUserData();
+			$karyawan = $user->karyawan;
+			$absensis = $karyawan->absensis;
+
+			return blade('dashboard.index', compact(['user', 'karyawan', 'absensis']));
 		} else {
 			return blade('template.login');
 		}
