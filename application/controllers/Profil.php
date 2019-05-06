@@ -28,5 +28,21 @@ class Profil extends CI_Controller {
 			
 			redirect(base_url('profil'));
 		}
+
+		unset($requestData['password_confirmation']);
+		$requestData['password'] = password_hash($requestData['password'], PASSWORD_BCRYPT);
+
+		User_model::where('id', $this->session->userID)->update($requestData);
+
+		$this->session->set_flashdata(
+			'alert',
+			[
+				'title' => 'Sukses',
+				'message' => 'Ubah Profil Berhasil !!!',
+				'class' => 'success',
+			]
+		);
+
+		redirect(base_url('profil'));
 	}
 }

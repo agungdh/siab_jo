@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: siab_jo
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Mon, 06 May 2019 06:18:26 +0200
+-- Date: Mon, 06 May 2019 06:58:28 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -89,13 +89,13 @@ COMMIT;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_karyawan` int(11) DEFAULT NULL,
+  `id_karyawan` int(11) NOT NULL,
   `password` varchar(191) NOT NULL,
   `level` enum('a','k') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_karyawan` (`id_karyawan`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +105,7 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (4,11,'$2y$10$ZBDR5y11FP9UrG5uFsfoXOMB3xwSNgALDP.7W4nMk2nOVxKjPyjBW','k'),(6,10,'$2y$10$aX0V1JA5iTEn7oB/iApfv.D88bHjoHwPmiHXmmOdycjAPrQSHECQG','a');
+INSERT INTO `user` VALUES (4,11,'$2y$10$ZBDR5y11FP9UrG5uFsfoXOMB3xwSNgALDP.7W4nMk2nOVxKjPyjBW','k'),(6,10,'$2y$10$uKp4/uLuA4GAXBCiInpxvuTy30bZbd6dQzE3eEis1OlmRREcySr3K','a');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -122,4 +122,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 06 May 2019 06:18:26 +0200
+-- Dump completed on: Mon, 06 May 2019 06:58:28 +0200
