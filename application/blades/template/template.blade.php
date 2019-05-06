@@ -40,7 +40,7 @@ if(ci()->session->login) {
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="{{base_url()}}assets/AdminLTE/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="{{base_url()}}assets/AdminLTE/dist/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -75,7 +75,7 @@ if(ci()->session->login) {
     }
   </script>
 </head>
-<body class="hold-transition skin-blue fixed sidebar-mini">
+<body class="hold-transition skin-blue-light fixed sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -103,7 +103,7 @@ if(ci()->session->login) {
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{base_url()}}assets/favicon/cbfjg-rsl5i.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{$userData->karyawan ? $userData->karyawan->nama : $userData->username}}</span>
+              <span class="hidden-xs">{{$userData->karyawan->nama}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -111,8 +111,8 @@ if(ci()->session->login) {
                 <img src="{{base_url()}}assets/favicon/cbfjg-rsl5i.png" class="img-circle" alt="User Image">
 
                 <p>
-                    {{$userData->karyawan ? $userData->karyawan->nama : $userData->username}}
-                    <small>{{$userData->username}}</small>
+                    {{$userData->karyawan->nama}}
+                    <small>{{$userData->karyawan->nip}}</small>
                 </p>
               </li>
               <!-- Menu Footer-->

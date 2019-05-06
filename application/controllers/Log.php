@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Illuminate\Database\Capsule\Manager as DB;
 
+use application\eloquents\Karyawan as Karyawan_model;
+
 class Log extends CI_Controller {
 
 	public function in()
@@ -10,15 +12,15 @@ class Log extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'username' => 'required',
+			'nip' => 'required',
 			'password' => 'required',
 		]);
 
 		if ($validator->passes()) {
-			$user = DB::table('user')->where(['username' => $requestData['username']])->first();
-			if (!($user && password_verify($requestData['password'], $user->password))) {
-				$validator->errors()->add('username', 'Username / Password Salah !!!');
-				$validator->errors()->add('password', 'Username / Password Salah !!!');
+			$Karyawan = Karyawan_model::where(['nip' => $requestData['nip']])->first();
+			if (!($Karyawan && password_verify($requestData['password'], $Karyawan->user->password))) {
+				$validator->errors()->add('nip', 'NIP / Password Salah !!!');
+				$validator->errors()->add('password', 'NIP / Password Salah !!!');
 			}
 		}
 
@@ -27,7 +29,7 @@ class Log extends CI_Controller {
 			$this->session->set_flashdata('old', $requestData);
 		} else {
 			$this->session->set_userdata([
-				'userID' => $user->id,
+				'userID' => $Karyawan->user->id,
 				'login' => true,
 			]);
 		}

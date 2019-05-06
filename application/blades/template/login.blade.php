@@ -41,9 +41,9 @@
 
     <form action="{{base_url()}}log/in" method="post">
       @php
-      if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('username')) {
+      if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('nip')) {
         $class = 'form-group has-feedback has-error';
-        $message = ci()->session->flashdata('errors')->first('username');
+        $message = ci()->session->flashdata('errors')->first('nip');
       } else {
         $class = 'form-group has-feedback';
         $message = '';
@@ -51,7 +51,7 @@
       @endphp
       <div class="{{$class}}">
         <div data-toggle="tooltip" title="{{$message}}">
-          <input name="username" type="text" class="form-control" placeholder="Username / NIP" value="{{ci()->session->flashdata('old') ? ci()->session->flashdata('old')['username'] : ''}}">
+          <input name="nip" type="text" class="form-control" placeholder="NIP" value="{{ci()->session->flashdata('old') ? ci()->session->flashdata('old')['nip'] : ''}}">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
       </div>

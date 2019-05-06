@@ -4,6 +4,7 @@ use Jenssegers\Blade\Blade;
 use JeffOchoa\ValidatorFactory;
 use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\User;
+use application\classes\Helper;
 
 if (!function_exists('blade')) {
     function blade($view, $data = [])
@@ -35,6 +36,13 @@ if (!function_exists('validator')) {
 if (!function_exists('getUserData')) {
     function getUserData()
     {
-        return User::find(ci()->session->userID);
+        return User::with('karyawan')->find(ci()->session->userID);
+    }
+ }
+
+if (!function_exists('helper')) {
+    function helper()
+    {
+        return new Helper;
     }
  }

@@ -9,3 +9,9 @@
     <i class="fa fa-users"></i> <span>Karyawan</span>
   </a>
 </li>
+
+<li>
+  <a href="{{ base_url() }}user">
+    <i class="fa fa-users"></i> <span>User</span>
+  </a>
+</li>
