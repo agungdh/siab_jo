@@ -55,7 +55,7 @@ Dashboard
         <span class="info-box-icon"><i class="fa fa-window-close"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Absen</span>
+          <span class="info-box-text">Absen (Bulan Ini)</span>
           <span class="info-box-number">{{helper()->ribuan(123123)}}X</span>
         </div>
         <!-- /.info-box-content -->
