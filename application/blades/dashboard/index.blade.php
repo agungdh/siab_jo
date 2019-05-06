@@ -10,7 +10,7 @@ Dashboard
 
 @section('content')
 <div class="row">
-
+    
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box bg-aqua">
         <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
@@ -62,6 +62,10 @@ Dashboard
       </div>
       <!-- /.info-box -->
     </div>
+
+</div>
+
+<div class="row">
 
 	<div class="col-md-12">
 		<div class="box box-primary">
