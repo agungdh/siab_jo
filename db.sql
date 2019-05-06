@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: siab_jo
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Mon, 06 May 2019 06:58:28 +0200
+-- Date: Mon, 06 May 2019 09:30:23 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -122,4 +122,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 06 May 2019 06:58:28 +0200
+-- Dump completed on: Mon, 06 May 2019 09:30:23 +0200
