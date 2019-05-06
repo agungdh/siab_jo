@@ -89,7 +89,7 @@ class Karyawan extends CI_Controller {
 			'alert',
 			[
 				'title' => 'Sukses',
-				'message' => 'Tambah Data Berhasil !!!',
+				'message' => 'Ubah Data Berhasil !!!',
 				'class' => 'success',
 			]
 		);

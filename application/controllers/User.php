@@ -46,9 +46,8 @@ class User extends CI_Controller {
 
 		unset($requestData['password_confirmation']);
 		$requestData['password'] = password_hash($requestData['password'], PASSWORD_BCRYPT);
-		dd($requestData);
 
-		Karyawan_model::insert($requestData);
+		User_model::insert($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -59,39 +58,48 @@ class User extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('user'));
 	}
 
 	public function ubah($id)
 	{
-		$karyawan = Karyawan_model::find($id);
+		$karyawans = Karyawan_model::all();
+		$user = User_model::find($id);
 
-		return blade('user.ubah', compact(['karyawan']));
+		return blade('user.ubah', compact(['user', 'karyawans']));
 	}
 
 	public function aksiubah($id)
 	{
-		$karyawan = Karyawan_model::find($id);
+		$user = User_model::find($id);
 
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'nip' => 'required',
-			'nama' => 'required',
+			'id_karyawan' => 'required',
+			'level' => 'required',
+			'password' => 'confirmed',
 		]);
 
-		if ($requestData['nip'] != $karyawan->nip && Karyawan_model::where(['nip' => $requestData['nip']])->first()) {
-			$validator->errors()->add('nip', 'NIP sudah ada !!!');
+		if ($requestData['id_karyawan'] != $user->id_karyawan && User_model::where(['id_karyawan' => $requestData['id_karyawan']])->first()) {
+			$validator->errors()->add('id_karyawan', 'User sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
 			
-			redirect(base_url('karyawan/ubah/' . $id));
+			redirect(base_url('user/ubah/' . $id));
 		}
 
-		Karyawan_model::where('id', $id)->update($requestData);
+		unset($requestData['password_confirmation']);
+		if ($requestData['password']) {
+			$requestData['password'] = password_hash($requestData['password'], PASSWORD_BCRYPT);
+		} else {
+			unset($requestData['password']);
+		}
+
+		User_model::where('id', $id)->update($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -102,13 +110,13 @@ class User extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('user'));
 	}
 
 	public function aksihapus($id)
 	{
 		try {
-			Karyawan_model::where('id', $id)->delete();
+			User_model::where('id', $id)->delete();
 		} catch (QueryException $exception) {
             $this->session->set_flashdata(
 			'alert',
@@ -118,7 +126,7 @@ class User extends CI_Controller {
                 'class' => 'error',
 			]);
 
-			redirect(base_url('karyawan'));
+			redirect(base_url('user'));
         }
 
 		$this->session->set_flashdata(
@@ -130,6 +138,6 @@ class User extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('user'));
 	}
 }
