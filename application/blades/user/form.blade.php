@@ -47,7 +47,7 @@
 	}
 	@endphp
 	<div class="{{$class}}">
-		<label for="level" data-toggle="tooltip" title="{{$message}}">level</label>
+		<label for="level" data-toggle="tooltip" title="{{$message}}">Level</label>
 		<div data-toggle="tooltip" title="{{$message}}">
 			<select class="form-control select2" name="level">
 				<option {{$value == '' ? 'selected' : null}} value="">Pilih Level</option>

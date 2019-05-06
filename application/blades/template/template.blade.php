@@ -118,7 +118,7 @@ if(ci()->session->login) {
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="{{base_url()}}" class="btn btn-default">Profil</a>
+                  <a href="{{base_url()}}profil" class="btn btn-default">Profil</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{base_url()}}log/out" class="btn btn-default">Logout</a>
