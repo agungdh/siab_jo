@@ -161,11 +161,7 @@ Riwayat Absensi
   }
 
   $(function() {
+    prosesFilter();
   });
-
-  function initTabel()
-  {
-
-  }
 </script>
 @endsection

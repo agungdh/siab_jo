@@ -206,10 +206,6 @@ var updateWaktu = function () {
 
 </script>
 
-<!-- map -->
-<script async defer 
-    src="https://maps.googleapis.com/maps/api/js?key={{getenv('GMAPS_API_KEY')}}">
-</script>
 
 <script>
   function initMap() {    
@@ -223,19 +219,6 @@ var updateWaktu = function () {
       map: state.data.map
     });
 
-    state.data.polygonCoords = [
-        new google.maps.LatLng(-5.344849,105.004231),
-        new google.maps.LatLng(-5.344999,105.004140),
-        new google.maps.LatLng(-5.345383,105.004129),
-        new google.maps.LatLng(-5.345501,105.004204),
-        new google.maps.LatLng(-5.345656,105.004413),
-        new google.maps.LatLng(-5.345720,105.004789),
-        new google.maps.LatLng(-5.345693,105.005197),
-        new google.maps.LatLng(-5.345437,105.005309),
-        new google.maps.LatLng(-5.345095,105.005374),
-        new google.maps.LatLng(-5.344903,105.005304),
-        new google.maps.LatLng(-5.344823,105.005213)
-    ];
     state.data.polygon = new google.maps.Polygon({
       paths: state.data.polygonCoords,
       strokeColor: '#FF0000',
