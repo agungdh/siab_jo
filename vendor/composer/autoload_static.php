@@ -80,6 +80,10 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
         array (
             'Gumlet\\' => 7,
         ),
+        'F' => 
+        array (
+            'FontLib\\' => 8,
+        ),
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
@@ -87,6 +91,7 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
         'D' => 
         array (
             'Dotenv\\' => 7,
+            'Dompdf\\' => 7,
             'Doctrine\\Common\\Inflector\\' => 26,
         ),
         'C' => 
@@ -245,6 +250,10 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
         array (
             0 => __DIR__ . '/..' . '/gumlet/php-image-resize/lib',
         ),
+        'FontLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
@@ -252,6 +261,10 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'Dompdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
         ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
@@ -268,6 +281,17 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
     );
 
     public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Svg\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src',
+            ),
+            'Sabberworm\\CSS' => 
+            array (
+                0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib',
+            ),
+        ),
         'P' => 
         array (
             'PhpOption\\' => 
@@ -284,12 +308,22 @@ class ComposerStaticInit2cd04f965d56032c0e694d99e7528d41
         ),
     );
 
+    public static $classMap = array (
+        'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
+        'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
+        'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
+        'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
+        'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
+        'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit2cd04f965d56032c0e694d99e7528d41::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2cd04f965d56032c0e694d99e7528d41::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit2cd04f965d56032c0e694d99e7528d41::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit2cd04f965d56032c0e694d99e7528d41::$classMap;
 
         }, null, ClassLoader::class);
     }
