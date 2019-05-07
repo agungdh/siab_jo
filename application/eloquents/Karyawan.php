@@ -16,14 +16,14 @@ class Karyawan extends Eloquent {
     }
 
     public function absensisToday(){
-    	return $this->hasMany('application\eloquents\Absensi', 'id_karyawan')->whereRaw('day(waktu) = day(now())');
+    	return $this->hasMany('application\eloquents\Absensi', 'id_karyawan')->whereRaw('date(waktu) = date(now())');
     }
    
     public function absensisTodayBerangkat(){
-        return $this->hasOne('application\eloquents\Absensi', 'id_karyawan')->whereRaw('day(waktu) = day(now())')->where('tipe', 'b');
+        return $this->hasOne('application\eloquents\Absensi', 'id_karyawan')->whereRaw('date(waktu) = date(now())')->where('tipe', 'b');
     }
 
     public function absensisTodayPulang(){
-        return $this->hasOne('application\eloquents\Absensi', 'id_karyawan')->whereRaw('day(waktu) = day(now())')->where('tipe', 'p');
+        return $this->hasOne('application\eloquents\Absensi', 'id_karyawan')->whereRaw('date(waktu) = date(now())')->where('tipe', 'p');
     }
 }

@@ -79,7 +79,7 @@ Dashboard
 	                <tr>
 	                  <th>Waktu</th>
                       <th>Tipe</th>
-                      <th>Foto</th>
+                      <th>Proses</th>
 	                </tr>
                 </thead>
                 <tbody>
