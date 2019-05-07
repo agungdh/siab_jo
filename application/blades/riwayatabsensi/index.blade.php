@@ -119,22 +119,37 @@ Riwayat Absensi
     var tanggal = $("#tanggal").val() == '' ? 0 : $("#tanggal").val();
     var sampai = $("#sampai").val() == '' ? 0 : $("#sampai").val();
 
-    // console.table([
-    //   {
-    //     kolom: 'id_karyawan',
-    //     data: id_karyawan
-    //   },
-    //   {
-    //     kolom: 'tanggal',
-    //     data: tanggal
-    //   },
-    //   {
-    //     kolom: 'sampai',
-    //     data: sampai
-    //   }
-    // ]);
+    $.ajax({
+      type: "GET",
+      url: `{{base_url()}}riwayatabsensi/getDataAbsensi/${id_karyawan}/${tanggal}/${sampai}`,
+      data: {
+        
+      },
+      success: function(data, textStatus, xhr ) {
+        if (!jQuery.isEmptyObject(data)) {
+          $("#iniTabel").html(data);
+        } else {
+          console.log('empty data ...');
+        }
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        console.table([
+          {
+            kolom: 'xhr',
+            data: xhr
+          },
+          {
+            kolom: 'textStatus',
+            data: textStatus
+          },
+          {
+            kolom: 'errorThrown',
+            data: errorThrown
+          }
+        ]);
+      }
+    });
 
-    window.location = `{{base_url()}}riwayatabsensi/getDataAbsensi/${id_karyawan}/${tanggal}/${sampai}`;
   }
 
   function lihat(waktu, tipe, id) {
@@ -147,5 +162,10 @@ Riwayat Absensi
 
   $(function() {
   });
+
+  function initTabel()
+  {
+
+  }
 </script>
 @endsection

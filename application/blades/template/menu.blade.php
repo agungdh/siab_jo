@@ -15,3 +15,9 @@
     <i class="fa fa-users"></i> <span>User</span>
   </a>
 </li>
+
+<li>
+  <a href="{{ base_url() }}riwayatabsensi">
+    <i class="fa fa-users"></i> <span>Riwayat Absensi</span>
+  </a>
+</li>

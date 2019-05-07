@@ -17,6 +17,7 @@ class Riwayatabsensi extends CI_Controller {
 	public function getDataAbsensi($id_karyawan = "0", $tanggal = "0", $sampai = "0")
 	{
 		$datas = new Absensi_model();
+		$datas = $datas->with('karyawan');
 
 		if ($id_karyawan != '0') {
 			$datas = $datas->where('id_karyawan', $id_karyawan);
@@ -34,11 +35,8 @@ class Riwayatabsensi extends CI_Controller {
 			$datas = $datas->whereRaw('date(waktu) = ?', $tanggal);
 		}
 
-		// echo $datas->toSql(); die;
-
 		$datas = $datas->get();
-		dd($datas);
-
-		dd(compact(['id_karyawan', 'tanggal', 'sampai']));
+		
+		return blade('riwayatabsensi.getDataAbsensi', compact(['datas']));
 	}
 }
