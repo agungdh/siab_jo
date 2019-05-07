@@ -32,7 +32,11 @@ class Riwayatabsensi extends CI_Controller {
 		} elseif ($tanggal != '0') {
 			$tanggal = helper()->parseTanggalIndo($tanggal);
 
-			$datas = $datas->whereRaw('date(waktu) = ?', $tanggal);
+			$datas = $datas->whereRaw('date(waktu) >= CAST(? AS DATE)', $tanggal);
+		} elseif ($sampai != '0') {
+			$sampai = helper()->parseTanggalIndo($sampai);
+
+			$datas = $datas->whereRaw('date(waktu) <= CAST(? AS DATE)', $sampai);
 		}
 
 		$datas = $datas->get();
