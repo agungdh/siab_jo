@@ -148,7 +148,11 @@ Absensi
 $("form").submit(function(e) {
     e.preventDefault();
 
-    @if($countAbsensisToday > 1)
+    @if(helper()->apakahLibur())
+    swal('Error', 'Hari Ini Libur !!!', 'error');
+
+    return false;
+    @elseif($countAbsensisToday > 1)
     swal('Error', 'Anda tidak bisa absen lagi !!!', 'error');
 
     return false;
