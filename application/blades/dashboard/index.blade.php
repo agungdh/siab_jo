@@ -88,7 +88,7 @@ Dashboard
                 		<td>{{helper()->tanggalWaktuIndo($item->waktu)}}</td>
                         <td>{{$item->tipe == 'b' ? 'Berangkat' : 'Pulang'}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}')">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}', '{{$item->lat}}', '{{$item->lng}}')">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                                 Detail
                             </button>
@@ -112,17 +112,26 @@ Dashboard
       <h4 class="modal-title">Data Absensi</h4>
     </div>
     <div class="modal-body">
-    <table class="table table-responsive">
-          <tr>
-            <td>Waktu</td>
-            <td>: <span id="valWaktu"></span></td>
-          </tr>
-          <tr>
-            <td>Tipe</td>
-            <td>: <span id="valTipe"></span></td>
-          </tr>
-    </table>
-    <img id="valGambar" class="img-responsive" alt="Gambar">
+      
+      <table class="table table-responsive">
+            <tr>
+              <td>Waktu</td>
+              <td>: <span id="valWaktu"></span></td>
+            </tr>
+            <tr>
+              <td>Tipe</td>
+              <td>: <span id="valTipe"></span></td>
+            </tr>
+      </table>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <img id="valGambar" class="img-responsive" alt="Gambar">
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div id="map" style="height: 400px; width: 100%;" class="gmap"></div>
+      </div>
+
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -134,7 +143,35 @@ Dashboard
 
 @section('js')
 <script type="text/javascript">
-    function lihat(waktu, tipe, id) {
+    function initMap() {    
+      state.data.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 19,
+        center: state.data.latlng
+      });
+
+      state.data.marker = new google.maps.Marker({
+        position: state.data.latlng,
+        map: state.data.map
+      });
+
+      state.data.polygon = new google.maps.Polygon({
+        paths: state.data.polygonCoords,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 3,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+      });
+      state.data.polygon.setMap(state.data.map);
+    }
+
+    function lihat(waktu, tipe, id, lat, lng) {
+        state.data.latlng = {
+            lat: parseFloat(lat),
+            lng: parseFloat(lng),
+        };
+        initMap();
+
         $("#valWaktu").html(waktu);
         $("#valTipe").html(tipe);
         $("#valGambar").prop('src', '{{base_url()}}uploads/fotoabsen/' + id);
