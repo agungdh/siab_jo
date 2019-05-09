@@ -17,10 +17,12 @@ $tanggal = date('YmdHisu');
             <td>{{$item->karyawan->nip}} - {{$item->karyawan->nama}}</td>
             <td>{{helper()->tanggalWaktuIndo($item->waktu)}}</td>
             <td>{{$item->tipe == 'b' ? 'Berangkat' : 'Pulang'}}</td>
-    		
-    		<td>
-      		    <button type="button" class="btn btn-danger btn-sm" onclick="hapus('{{ $item->id }}')"><i class="glyphicon glyphicon-trash"></i> Hapus</button>
-    		</td>
+      		  <td>
+                <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}', '{{$item->lat}}', '{{$item->lng}}', '{{$item->karyawan->nip}} - {{$item->karyawan->nama}}')">
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                    Detail
+                </button>
+            </td>
     	</tr>
     	@endforeach
     </tbody>

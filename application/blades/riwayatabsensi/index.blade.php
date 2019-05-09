@@ -79,17 +79,29 @@ Riwayat Absensi
       <h4 class="modal-title">Data Absensi</h4>
     </div>
     <div class="modal-body">
-    <table class="table table-responsive">
-          <tr>
-            <td>Waktu</td>
-            <td>: <span id="valWaktu"></span></td>
-          </tr>
-          <tr>
-            <td>Tipe</td>
-            <td>: <span id="valTipe"></span></td>
-          </tr>
-    </table>
-    <img id="valGambar" class="img-responsive" alt="Gambar">
+    
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <table>
+              <tr>
+                <td>Karyawan</td>
+                <td>: <span id="valKaryawan"></span></td>
+              </tr>
+              <tr>
+                <td>Waktu</td>
+                <td>: <span id="valWaktu"></span></td>
+              </tr>
+              <tr>
+                <td>Tipe</td>
+                <td>: <span id="valTipe"></span></td>
+              </tr>
+        </table>
+        <img id="valGambar" class="img-responsive" alt="Gambar">
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div id="map" style="height: 400px; width: 100%;" class="gmap"></div>
+      </div>
+
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -152,16 +164,45 @@ Riwayat Absensi
 
   }
 
-  function lihat(waktu, tipe, id) {
-      $("#valWaktu").html(waktu);
-      $("#valTipe").html(tipe);
-      $("#valGambar").prop('src', '{{base_url()}}uploads/fotoabsen/' + id);
+  function lihat(waktu, tipe, id, lat, lng, karyawan) {
+        state.data.latlng = {
+            lat: parseFloat(lat),
+            lng: parseFloat(lng),
+        };
+        initMap();
 
-      $("#modalKu").modal();
-  }
+        $("#valKaryawan").html(karyawan);
+        $("#valWaktu").html(waktu);
+        $("#valTipe").html(tipe);
+        $("#valGambar").prop('src', '{{base_url()}}uploads/fotoabsen/' + id);
+
+        $("#modalKu").modal();
+    }
 
   $(function() {
     prosesFilter();
   });
+
+  function initMap() {    
+      state.data.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 19,
+        center: state.data.latlng
+      });
+
+      state.data.marker = new google.maps.Marker({
+        position: state.data.latlng,
+        map: state.data.map
+      });
+
+      state.data.polygon = new google.maps.Polygon({
+        paths: state.data.polygonCoords,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 3,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+      });
+      state.data.polygon.setMap(state.data.map);
+    }
 </script>
 @endsection

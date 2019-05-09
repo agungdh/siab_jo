@@ -88,7 +88,7 @@ Dashboard
                 		<td>{{helper()->tanggalWaktuIndo($item->waktu)}}</td>
                         <td>{{$item->tipe == 'b' ? 'Berangkat' : 'Pulang'}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}', '{{$item->lat}}', '{{$item->lng}}')">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}', '{{$item->lat}}', '{{$item->lng}}', `{{$karyawan->nip}} - {{$karyawan->nama}}`)">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                                 Detail
                             </button>
@@ -112,23 +112,26 @@ Dashboard
       <h4 class="modal-title">Data Absensi</h4>
     </div>
     <div class="modal-body">
-      
-      <table class="table table-responsive">
-            <tr>
-              <td>Waktu</td>
-              <td>: <span id="valWaktu"></span></td>
-            </tr>
-            <tr>
-              <td>Tipe</td>
-              <td>: <span id="valTipe"></span></td>
-            </tr>
-      </table>
-
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <table>
+              <tr>
+                <td>Karyawan</td>
+                <td>: <span id="valKaryawan"></span></td>
+              </tr>
+              <tr>
+                <td>Waktu</td>
+                <td>: <span id="valWaktu"></span></td>
+              </tr>
+              <tr>
+                <td>Tipe</td>
+                <td>: <span id="valTipe"></span></td>
+              </tr>
+        </table>
         <img id="valGambar" class="img-responsive" alt="Gambar">
       </div>
 
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div id="map" style="height: 400px; width: 100%;" class="gmap"></div>
       </div>
 
@@ -165,13 +168,14 @@ Dashboard
       state.data.polygon.setMap(state.data.map);
     }
 
-    function lihat(waktu, tipe, id, lat, lng) {
+    function lihat(waktu, tipe, id, lat, lng, karyawan) {
         state.data.latlng = {
             lat: parseFloat(lat),
             lng: parseFloat(lng),
         };
         initMap();
 
+        $("#valKaryawan").html(karyawan);
         $("#valWaktu").html(waktu);
         $("#valTipe").html(tipe);
         $("#valGambar").prop('src', '{{base_url()}}uploads/fotoabsen/' + id);
