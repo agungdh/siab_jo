@@ -1,3 +1,7 @@
+@php
+$userData = getUserData();
+@endphp
+
 @extends('template.template')
 
 @section('title')
@@ -20,10 +24,14 @@ Riwayat Absensi
           <div class="form-group has-feedback">
             <label for="id_karyawan">Karyawan</label>
             <select class="form-control select2" name="id_karyawan" id="id_karyawan">
+              @if($userData->level == 'a')
               <option value="0">Semua Karyawan</option>
               @foreach($karyawans as $item)
               <option value="{{$item->id}}">{{$item->nip}} - {{$item->nama}}</option>
               @endforeach
+              @else
+              <option value="{{$userData->karyawan->id}}">{{$userData->karyawan->nip}} - {{$userData->karyawan->nama}}</option>
+              @endif
             </select>
           </div>
         </div>
@@ -124,9 +132,12 @@ Riwayat Absensi
   });
 
   $("#reset").click(function() {
+    @if($userData->level == 'a')
     $("#id_karyawan").val('0');
     $("#id_karyawan").select2('destroy');
     $("#id_karyawan").select2();
+    @endif
+
     $("#tanggal").val('')
     $("#sampai").val('')
   });
