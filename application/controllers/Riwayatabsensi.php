@@ -43,4 +43,32 @@ class Riwayatabsensi extends CI_Controller {
 		
 		return blade('riwayatabsensi.getDataAbsensi', compact(['datas']));
 	}
+
+	public function aksihapus($id)
+	{
+		try {
+			Absensi_model::where('id', $id)->delete();
+		} catch (QueryException $exception) {
+            $this->session->set_flashdata(
+			'alert',
+			[
+				'title' => 'ERROR !!!',
+                'message' => getenv('CI_ENV') == 'development' ? $exception->getMessage() : 'Something Went Wrong !!!',
+                'class' => 'error',
+			]);
+
+			redirect(base_url('riwayatabsensi'));
+        }
+
+		$this->session->set_flashdata(
+			'alert',
+			[
+				'title' => 'Sukses',
+				'message' => 'Hapus Data Berhasil !!!',
+				'class' => 'success',
+			]
+		);
+
+		redirect(base_url('riwayatabsensi'));
+	}
 }

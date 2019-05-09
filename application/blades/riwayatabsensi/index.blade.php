@@ -172,6 +172,7 @@ Riwayat Absensi
 
   function lihat(waktu, tipe, id, lat, lng, karyawan, id_karyawan) {
         state.data.id_karyawan_show = id_karyawan;
+        state.data.id_absensi = id;
 
         state.data.latlng = {
             lat: parseFloat(lat),
@@ -211,6 +212,19 @@ Riwayat Absensi
         fillOpacity: 0.35
       });
       state.data.polygon.setMap(state.data.map);
+    }
+
+    function hapus(id) {
+      swal({
+        title: "Yakin Hapus ???",
+        text: "Data yang sudah dihapus tidak dapat dikembalikan lagi !!!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Hapus",
+      }, function(){
+        window.location = "{{base_url()}}riwayatabsensi/aksihapus/" + state.data.id_absensi;
+      });
     }
 </script>
 @endsection

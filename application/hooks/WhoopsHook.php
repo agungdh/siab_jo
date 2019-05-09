@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') || exit('Access Denied');
-$aa = 'asf';
+
 // IMPORT DEPENDENCIES --------------------------------------------------------
 use Whoops\{
     Handler\JsonResponseHandler,
