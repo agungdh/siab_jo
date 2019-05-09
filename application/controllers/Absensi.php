@@ -9,14 +9,14 @@ use application\eloquents\Karyawan as Karyawan_model;
 class Absensi extends CI_Controller {
 	public function index()
 	{
-		$karyawan = Karyawan_model::with('absensisToday')->find(10);
+		$karyawan = Karyawan_model::with('absensisToday')->find(getUserData()->karyawan->id);
 
 		return blade('absensi.index', compact(['karyawan']));
 	}
 
 	public function absen()
 	{
-		$karyawan = Karyawan_model::with('absensisToday')->find(10);
+		$karyawan = Karyawan_model::with('absensisToday')->find(getUserData()->karyawan->id);
 		$absensisToday = $karyawan->absensisToday;
 		$countAbsensisToday = count($absensisToday);
 
@@ -38,7 +38,7 @@ class Absensi extends CI_Controller {
         }
 
 		$requestData = [];
-		$requestData['id_karyawan'] = 10;
+		$requestData['id_karyawan'] = getUserData()->karyawan->id;
 		$requestData['lat'] = $this->input->post('lat');
 		$requestData['lng'] = $this->input->post('lng');
 		$requestData['lokasi'] = $this->input->post('lokasi');

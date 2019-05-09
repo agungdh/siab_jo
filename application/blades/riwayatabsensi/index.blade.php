@@ -104,6 +104,7 @@ Riwayat Absensi
 
     </div>
     <div class="modal-footer">
+      <button type="button" class="btn btn-danger" onclick="hapus()">Hapus</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
   </div>
@@ -113,6 +114,11 @@ Riwayat Absensi
 
 @section('js')
 <script type="text/javascript">
+  function hapus()
+  {
+    swal(state.data.id_karyawan_show);
+  }
+
   $("#filter").click(function() {
     prosesFilter();
   });
@@ -164,7 +170,9 @@ Riwayat Absensi
 
   }
 
-  function lihat(waktu, tipe, id, lat, lng, karyawan) {
+  function lihat(waktu, tipe, id, lat, lng, karyawan, id_karyawan) {
+        state.data.id_karyawan_show = id_karyawan;
+
         state.data.latlng = {
             lat: parseFloat(lat),
             lng: parseFloat(lng),
