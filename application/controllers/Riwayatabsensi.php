@@ -10,8 +10,9 @@ class Riwayatabsensi extends CI_Controller {
 	public function index()
 	{	
 		$karyawans = Karyawan_model::all();
+		$userData = getUserData();
 
-		return blade('riwayatabsensi.index', compact(['karyawans']));
+		return blade('riwayatabsensi.index', compact(['karyawans', 'userData']));
 	}
 
 	public function getDataAbsensi($id_karyawan = "0", $tanggal = "0", $sampai = "0")

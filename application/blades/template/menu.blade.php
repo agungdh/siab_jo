@@ -21,3 +21,9 @@
     <i class="fa fa-users"></i> <span>Riwayat Absensi</span>
   </a>
 </li>
+
+<li>
+  <a href="{{ base_url() }}harilibur">
+    <i class="fa fa-users"></i> <span>Hari Libur</span>
+  </a>
+</li>

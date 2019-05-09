@@ -2,6 +2,7 @@
 namespace application\classes;
 
 use Illuminate\Database\Capsule\Manager as DB;
+use application\eloquents\HariLibur as HariLibur_model;
 
 class Helper extends \agungdh\Pustaka
 {
@@ -15,5 +16,10 @@ class Helper extends \agungdh\Pustaka
 		} else {
 			return false;
 		}
+	}
+
+	public function tanggalKalender3Tahun()
+	{
+		return HariLibur_model::whereRaw('year(tanggal) in (?,?,?)', [date('Y') - 1, date('Y'), date('Y') + 1])->get();
 	}
 }

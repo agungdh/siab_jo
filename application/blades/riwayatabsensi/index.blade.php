@@ -1,7 +1,3 @@
-@php
-$userData = getUserData();
-@endphp
-
 @extends('template.template')
 
 @section('title')
