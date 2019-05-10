@@ -1,29 +1,42 @@
 <li>
   <a href="{{ base_url() }}absensi">
-    <i class="fa fa-users"></i> <span>Absensi</span>
-  </a>
-</li>
-
-<li>
-  <a href="{{ base_url() }}karyawan">
-    <i class="fa fa-users"></i> <span>Karyawan</span>
-  </a>
-</li>
-
-<li>
-  <a href="{{ base_url() }}user">
-    <i class="fa fa-users"></i> <span>User</span>
+    <i class="fa fa-address-book"></i> <span>Absensi</span>
   </a>
 </li>
 
 <li>
   <a href="{{ base_url() }}riwayatabsensi">
-    <i class="fa fa-users"></i> <span>Riwayat Absensi</span>
+    <i class="fa fa-book"></i> <span>Riwayat Absensi</span>
   </a>
 </li>
 
-<li>
-  <a href="{{ base_url() }}harilibur">
-    <i class="fa fa-users"></i> <span>Hari Libur</span>
-  </a>
+<li class="treeview">
+      <a href="#">
+        <i class="fa fa-users"></i>
+        <span>Master</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+
+        <li>
+          <a href="{{ base_url() }}karyawan">
+            <i class="fa fa-users"></i> <span>Karyawan</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ base_url() }}user">
+            <i class="fa fa-users"></i> <span>User</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ base_url() }}harilibur">
+            <i class="fa fa-calendar"></i> <span>Hari Libur</span>
+          </a>
+        </li>
+
+      </ul>
 </li>
