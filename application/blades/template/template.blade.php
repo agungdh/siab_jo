@@ -123,13 +123,13 @@ if(ci()->session->login) {
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{base_url()}}assets/favicon/cbfjg-rsl5i.png" class="user-image" alt="User Image">
+              <img src="{{base_url()}}assets/favicon/favicon.png" class="user-image" alt="User Image">
               <span class="hidden-xs">{{$userData->karyawan->nama}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{base_url()}}assets/favicon/cbfjg-rsl5i.png" class="img-circle" alt="User Image">
+                <img src="{{base_url()}}assets/favicon/favicon.png" class="img-circle" alt="User Image">
 
                 <p>
                     {{$userData->karyawan->nama}}
