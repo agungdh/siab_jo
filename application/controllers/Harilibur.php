@@ -20,22 +20,26 @@ class Harilibur extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'nip' => 'required',
-			'nama' => 'required',
+			'tanggal' => 'required',
+			'keterangan' => 'required',
 		]);
 
-		if (Karyawan_model::where(['nip' => $requestData['nip']])->first()) {
-			$validator->errors()->add('nip', 'NIP sudah ada !!!');
+		$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
+
+		if (HariLibur_model::where(['tanggal' => $requestData['tanggal']])->first()) {
+			$validator->errors()->add('tanggal', 'Tanggal sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {
+			$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
+		
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
 			
-			redirect(base_url('karyawan/tambah'));
+			redirect(base_url('harilibur/tambah'));
 		}
 
-		Karyawan_model::insert($requestData);
+		HariLibur_model::insert($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -46,41 +50,44 @@ class Harilibur extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('harilibur'));
 	}
 
 	public function ubah($id)
 	{
-		$hariLiburs = $this->hariLiburs;
+		$hariLibur = HariLibur_model::find($id);
+		$hariLibur->tanggal = helper()->tanggalIndo($hariLibur->tanggal);
 
-		$karyawan = Karyawan_model::find($id);
-
-		return blade('harilibur.ubah', compact(['karyawan']));
+		return blade('harilibur.ubah', compact(['hariLibur']));
 	}
 
 	public function aksiubah($id)
 	{
-		$karyawan = Karyawan_model::find($id);
+		$hariLibur = HariLibur_model::find($id);
 
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'nip' => 'required',
-			'nama' => 'required',
+			'tanggal' => 'required',
+			'keterangan' => 'required',
 		]);
 
-		if ($requestData['nip'] != $karyawan->nip && Karyawan_model::where(['nip' => $requestData['nip']])->first()) {
-			$validator->errors()->add('nip', 'NIP sudah ada !!!');
+		$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
+
+		if ($requestData['tanggal'] != $hariLibur->tanggal && HariLibur_model::where(['tanggal' => $requestData['tanggal']])->first()) {
+			$validator->errors()->add('tanggal', 'Tanggal sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {
+			$requestData['tanggal'] = helper()->tanggalIndo($requestData['tanggal']);
+
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
 			
-			redirect(base_url('karyawan/ubah/' . $id));
+			redirect(base_url('harilibur/ubah/' . $id));
 		}
 
-		Karyawan_model::where('id', $id)->update($requestData);
+		HariLibur_model::where('id', $id)->update($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -91,13 +98,13 @@ class Harilibur extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('harilibur'));
 	}
 
 	public function aksihapus($id)
 	{
 		try {
-			Karyawan_model::where('id', $id)->delete();
+			HariLibur_model::where('id', $id)->delete();
 		} catch (QueryException $exception) {
             $this->session->set_flashdata(
 			'alert',
@@ -107,7 +114,7 @@ class Harilibur extends CI_Controller {
                 'class' => 'error',
 			]);
 
-			redirect(base_url('karyawan'));
+			redirect(base_url('harilibur'));
         }
 
 		$this->session->set_flashdata(
@@ -119,6 +126,6 @@ class Harilibur extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('harilibur'));
 	}
 }
