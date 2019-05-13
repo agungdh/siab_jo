@@ -24,14 +24,14 @@ class Harilibur extends CI_Controller {
 			'keterangan' => 'required',
 		]);
 
-		$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
+		$requestData['tanggal'] = $requestData['tanggal'] ? helper()->parseTanggalIndo($requestData['tanggal']) : null;
 
 		if (HariLibur_model::where(['tanggal' => $requestData['tanggal']])->first()) {
 			$validator->errors()->add('tanggal', 'Tanggal sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {
-			$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
+			$requestData['tanggal'] = $requestData['tanggal'] ? helper()->tanggalIndo($requestData['tanggal']) : null;
 		
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
@@ -72,14 +72,14 @@ class Harilibur extends CI_Controller {
 			'keterangan' => 'required',
 		]);
 
-		$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
+		$requestData['tanggal'] = $requestData['tanggal'] ? helper()->parseTanggalIndo($requestData['tanggal']) : null;
 
 		if ($requestData['tanggal'] != $hariLibur->tanggal && HariLibur_model::where(['tanggal' => $requestData['tanggal']])->first()) {
 			$validator->errors()->add('tanggal', 'Tanggal sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {
-			$requestData['tanggal'] = helper()->tanggalIndo($requestData['tanggal']);
+		$requestData['tanggal'] = $requestData['tanggal'] ? helper()->tanggalIndo($requestData['tanggal']) : null;
 
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
