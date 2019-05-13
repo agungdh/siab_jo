@@ -1,11 +1,11 @@
 @extends('template.template')
 
 @section('title')
-Karyawan
+Pegawai
 @endsection
 
 @section('nav')
-@include('karyawan.nav')
+@include('pegawai.nav')
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@ Karyawan
 	<div class="col-md-12">
 		<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Data Karyawan</h3>
+              <h3 class="box-title">Data Pegawai</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            	<a class="btn btn-success btn-sm" href="{{base_url()}}karyawan/tambah">
+            	<a class="btn btn-success btn-sm" href="{{base_url()}}pegawai/tambah">
                   <i class="glyphicon glyphicon-plus"></i> Tambah
                 </a><br><br>
               <table class="table table-bordered table-hover datatable" style="width: 100%">
@@ -29,13 +29,13 @@ Karyawan
 	                </tr>
                 </thead>
                 <tbody>
-                	@foreach($karyawans as $item)
+                	@foreach($pegawais as $item)
                 	<tr>
                 		<td>{{$item->nip}}</td>
                         <td>{{$item->nama}}</td>
                 		
                 		<td>
-                        <a class="btn btn-primary btn-sm" href="{{base_url()}}karyawan/ubah/{{$item->id}}">
+                        <a class="btn btn-primary btn-sm" href="{{base_url()}}pegawai/ubah/{{$item->id}}">
     	                  <i class="glyphicon glyphicon-pencil"></i> Ubah
     	                </a>
 
@@ -63,7 +63,7 @@ function hapus(id) {
 	  confirmButtonColor: "#DD6B55",
 	  confirmButtonText: "Hapus",
 	}, function(){
-	  window.location = "{{base_url()}}karyawan/aksihapus/" + id;
+	  window.location = "{{base_url()}}pegawai/aksihapus/" + id;
 	});
 }
 </script>

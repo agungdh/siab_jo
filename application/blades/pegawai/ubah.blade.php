@@ -1,11 +1,11 @@
 @extends('template.template')
 
 @section('title')
-Karyawan
+Pegawai
 @endsection
 
 @section('nav')
-@include('karyawan.nav')
+@include('pegawai.nav')
 @endsection
 
 @section('content')
@@ -13,15 +13,15 @@ Karyawan
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<h3 class="box-title">Ubah Karyawan</h3>
+				<h3 class="box-title">Ubah Pegawai</h3>
 			</div>
 
-			<form action="{{base_url()}}karyawan/aksiubah/{{$karyawan->id}}" method="post" role="form">
-				@include('karyawan.form')
+			<form action="{{base_url()}}pegawai/aksiubah/{{$pegawai->id}}" method="post" role="form">
+				@include('pegawai.form')
 
 				<div class="box-footer">
 					<button type="submit" class="btn btn-success">Simpan</button>
-					<a href="{{base_url()}}karyawan" class="btn btn-info">Batal</a>
+					<a href="{{base_url()}}pegawai" class="btn btn-info">Batal</a>
 				</div>
 			</form>
 		</div>

@@ -21,16 +21,16 @@ Profil
 				<div class="box-body">
 
 					<div class="form-group has-feedback">
-						<label>Karyawan</label>
+						<label>Pegawai</label>
 						<div>
-							<input type="text" disabled class="form-control" value="{{$user->karyawan->nip}} - {{$user->karyawan->nama}}">
+							<input type="text" disabled class="form-control" value="{{$user->pegawai->nip}} - {{$user->pegawai->nama}}">
 						</div>
 					</div>
 
 					<div class="form-group has-feedback">
 						<label>Level</label>
 						<div>
-							<input type="text" disabled class="form-control" value="{{$user->level == 'a' ? 'Admin' : 'Karyawan'}}">
+							<input type="text" disabled class="form-control" value="{{$user->level == 'a' ? 'Admin' : 'Pegawai'}}">
 						</div>
 					</div>
 

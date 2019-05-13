@@ -7,7 +7,7 @@ class Absensi extends Eloquent {
     protected $table = "absensi";
     public $timestamps = false;
 
-    public function karyawan(){
-    	return $this->belongsTo('application\eloquents\Karyawan', 'id_karyawan');
+    public function pegawai(){
+    	return $this->belongsTo('application\eloquents\Pegawai', 'id_pegawai');
     }
 }

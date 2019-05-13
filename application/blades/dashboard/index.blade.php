@@ -88,7 +88,7 @@ Dashboard
                 		<td>{{helper()->tanggalWaktuIndo($item->waktu)}}</td>
                         <td>{{$item->tipe == 'b' ? 'Berangkat' : 'Pulang'}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}', '{{$item->lat}}', '{{$item->lng}}', `{{$karyawan->nip}} - {{$karyawan->nama}}`)">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}', '{{$item->lat}}', '{{$item->lng}}', `{{$pegawai->nip}} - {{$pegawai->nama}}`)">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                                 Detail
                             </button>
@@ -116,8 +116,8 @@ Dashboard
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <table>
               <tr>
-                <td>Karyawan</td>
-                <td>: <span id="valKaryawan"></span></td>
+                <td>Pegawai</td>
+                <td>: <span id="valPegawai"></span></td>
               </tr>
               <tr>
                 <td>Waktu</td>
@@ -168,14 +168,14 @@ Dashboard
       state.data.polygon.setMap(state.data.map);
     }
 
-    function lihat(waktu, tipe, id, lat, lng, karyawan) {
+    function lihat(waktu, tipe, id, lat, lng, pegawai) {
         state.data.latlng = {
             lat: parseFloat(lat),
             lng: parseFloat(lng),
         };
         initMap();
 
-        $("#valKaryawan").html(karyawan);
+        $("#valPegawai").html(pegawai);
         $("#valWaktu").html(waktu);
         $("#valTipe").html(tipe);
         $("#valGambar").prop('src', '{{base_url()}}uploads/fotoabsen/' + id);

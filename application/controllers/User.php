@@ -5,22 +5,22 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\QueryException;
 
 use application\eloquents\User as User_model;
-use application\eloquents\Karyawan as Karyawan_model;
+use application\eloquents\Pegawai as Pegawai_model;
 
 class User extends CI_Controller {
 
 	public function index()
 	{
-		$users = User_model::with('karyawan')->get();
+		$users = User_model::with('pegawai')->get();
 
 		return blade('user.index', compact(['users']));
 	}
 
 	public function tambah()
 	{
-		$karyawans = Karyawan_model::all();
+		$pegawais = Pegawai_model::all();
 
-		return blade('user.tambah', compact(['karyawans']));
+		return blade('user.tambah', compact(['pegawais']));
 	}
 
 	public function aksitambah()
@@ -28,13 +28,13 @@ class User extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'id_karyawan' => 'required',
+			'id_pegawai' => 'required',
 			'level' => 'required',
 			'password' => 'required|confirmed',
 		]);
 
-		if (User_model::where(['id_karyawan' => $requestData['id_karyawan']])->first()) {
-			$validator->errors()->add('id_karyawan', 'User sudah ada !!!');
+		if (User_model::where(['id_pegawai' => $requestData['id_pegawai']])->first()) {
+			$validator->errors()->add('id_pegawai', 'User sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {
@@ -63,10 +63,10 @@ class User extends CI_Controller {
 
 	public function ubah($id)
 	{
-		$karyawans = Karyawan_model::all();
+		$pegawais = Pegawai_model::all();
 		$user = User_model::find($id);
 
-		return blade('user.ubah', compact(['user', 'karyawans']));
+		return blade('user.ubah', compact(['user', 'pegawais']));
 	}
 
 	public function aksiubah($id)
@@ -76,13 +76,13 @@ class User extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'id_karyawan' => 'required',
+			'id_pegawai' => 'required',
 			'level' => 'required',
 			'password' => 'confirmed',
 		]);
 
-		if ($requestData['id_karyawan'] != $user->id_karyawan && User_model::where(['id_karyawan' => $requestData['id_karyawan']])->first()) {
-			$validator->errors()->add('id_karyawan', 'User sudah ada !!!');
+		if ($requestData['id_pegawai'] != $user->id_pegawai && User_model::where(['id_pegawai' => $requestData['id_pegawai']])->first()) {
+			$validator->errors()->add('id_pegawai', 'User sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {

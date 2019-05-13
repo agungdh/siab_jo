@@ -21,8 +21,8 @@
       <ul class="treeview-menu">
 
         <li>
-          <a href="{{ base_url() }}karyawan">
-            <i class="fa fa-users"></i> <span>Karyawan</span>
+          <a href="{{ base_url() }}pegawai">
+            <i class="fa fa-users"></i> <span>Pegawai</span>
           </a>
         </li>
 

@@ -1,5 +1,5 @@
 @php
-$absensisToday = $karyawan->absensisToday;
+$absensisToday = $pegawai->absensisToday;
 $countAbsensisToday = count($absensisToday);
 @endphp
 
@@ -44,8 +44,8 @@ Absensi
 
                         if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['lat']) {
                             $value = ci()->session->flashdata('old')['lat'];
-                        } elseif (isset($karyawan) && $karyawan['lat']) {
-                            $value = $karyawan['lat'];
+                        } elseif (isset($pegawai) && $pegawai['lat']) {
+                            $value = $pegawai['lat'];
                         } else {
                             $value = '';
                         }
@@ -70,8 +70,8 @@ Absensi
 
                         if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['lng']) {
                             $value = ci()->session->flashdata('old')['lng'];
-                        } elseif (isset($karyawan) && $karyawan['lng']) {
-                            $value = $karyawan['lng'];
+                        } elseif (isset($pegawai) && $pegawai['lng']) {
+                            $value = $pegawai['lng'];
                         } else {
                             $value = '';
                         }

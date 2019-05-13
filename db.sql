@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: siab_jo
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Mon, 13 May 2019 02:57:27 +0200
+-- Date: Mon, 13 May 2019 03:42:57 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -156,7 +156,7 @@ CREATE TABLE `pegawai` (
   KEY `id_golongan` (`id_golongan`),
   CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_eselon`) REFERENCES `eselon` (`id`),
   CONSTRAINT `pegawai_ibfk_2` FOREIGN KEY (`id_golongan`) REFERENCES `golongan` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,11 +166,12 @@ CREATE TABLE `pegawai` (
 LOCK TABLES `pegawai` WRITE;
 /*!40000 ALTER TABLE `pegawai` DISABLE KEYS */;
 SET autocommit=0;
+INSERT INTO `pegawai` VALUES (1,17,9,'15753003','Agung Sapto Margono Dh');
 /*!40000 ALTER TABLE `pegawai` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `pegawai` with 0 row(s)
+-- Dumped table `pegawai` with 1 row(s)
 --
 
 --
@@ -183,11 +184,11 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_pegawai` int(11) NOT NULL,
   `password` varchar(191) NOT NULL,
-  `level` enum('a','k') NOT NULL,
+  `level` enum('a','p') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_pegawai` (`id_pegawai`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,11 +198,12 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
+INSERT INTO `user` VALUES (7,1,'$2y$12$nPqu2AT2IT5YfLQedrlDKekbCn7KPd0k1MeATu.vdOTB.bFNUVIRm','a');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `user` with 0 row(s)
+-- Dumped table `user` with 1 row(s)
 --
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -213,4 +215,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 13 May 2019 02:57:27 +0200
+-- Dump completed on: Mon, 13 May 2019 03:42:57 +0200

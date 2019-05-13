@@ -18,15 +18,15 @@ Riwayat Absensi
 
         <div class="col-md-4">
           <div class="form-group has-feedback">
-            <label for="id_karyawan">Karyawan</label>
-            <select class="form-control select2" name="id_karyawan" id="id_karyawan">
+            <label for="id_pegawai">Pegawai</label>
+            <select class="form-control select2" name="id_pegawai" id="id_pegawai">
               @if($userData->level == 'a')
-              <option value="0">Semua Karyawan</option>
-              @foreach($karyawans as $item)
+              <option value="0">Semua Pegawai</option>
+              @foreach($pegawais as $item)
               <option value="{{$item->id}}">{{$item->nip}} - {{$item->nama}}</option>
               @endforeach
               @else
-              <option value="{{$userData->karyawan->id}}">{{$userData->karyawan->nip}} - {{$userData->karyawan->nama}}</option>
+              <option value="{{$userData->pegawai->id}}">{{$userData->pegawai->nip}} - {{$userData->pegawai->nama}}</option>
               @endif
             </select>
           </div>
@@ -87,8 +87,8 @@ Riwayat Absensi
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <table>
               <tr>
-                <td>Karyawan</td>
-                <td>: <span id="valKaryawan"></span></td>
+                <td>Pegawai</td>
+                <td>: <span id="valPegawai"></span></td>
               </tr>
               <tr>
                 <td>Waktu</td>
@@ -120,7 +120,7 @@ Riwayat Absensi
 <script type="text/javascript">
   function hapus()
   {
-    swal(state.data.id_karyawan_show);
+    swal(state.data.id_pegawai_show);
   }
 
   $("#filter").click(function() {
@@ -129,9 +129,9 @@ Riwayat Absensi
 
   $("#reset").click(function() {
     @if($userData->level == 'a')
-    $("#id_karyawan").val('0');
-    $("#id_karyawan").select2('destroy');
-    $("#id_karyawan").select2();
+    $("#id_pegawai").val('0');
+    $("#id_pegawai").select2('destroy');
+    $("#id_pegawai").select2();
     @endif
 
     $("#tanggal").val('')
@@ -140,13 +140,13 @@ Riwayat Absensi
 
   function prosesFilter()
   {
-    var id_karyawan = $("#id_karyawan").val();
+    var id_pegawai = $("#id_pegawai").val();
     var tanggal = $("#tanggal").val() == '' ? 0 : $("#tanggal").val();
     var sampai = $("#sampai").val() == '' ? 0 : $("#sampai").val();
 
     $.ajax({
       type: "GET",
-      url: `{{base_url()}}riwayatabsensi/getDataAbsensi/${id_karyawan}/${tanggal}/${sampai}`,
+      url: `{{base_url()}}riwayatabsensi/getDataAbsensi/${id_pegawai}/${tanggal}/${sampai}`,
       data: {
         
       },
@@ -177,8 +177,8 @@ Riwayat Absensi
 
   }
 
-  function lihat(waktu, tipe, id, lat, lng, karyawan, id_karyawan) {
-        state.data.id_karyawan_show = id_karyawan;
+  function lihat(waktu, tipe, id, lat, lng, pegawai, id_pegawai) {
+        state.data.id_pegawai_show = id_pegawai;
         state.data.id_absensi = id;
 
         state.data.latlng = {
@@ -187,7 +187,7 @@ Riwayat Absensi
         };
         initMap();
 
-        $("#valKaryawan").html(karyawan);
+        $("#valPegawai").html(pegawai);
         $("#valWaktu").html(waktu);
         $("#valTipe").html(tipe);
         $("#valGambar").prop('src', '{{base_url()}}uploads/fotoabsen/' + id);

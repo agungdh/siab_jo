@@ -4,20 +4,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\QueryException;
 
-use application\eloquents\Karyawan as Karyawan_model;
+use application\eloquents\Pegawai as Pegawai_model;
 
 class Absensi extends CI_Controller {
 	public function index()
 	{
-		$karyawan = Karyawan_model::with('absensisToday')->find(getUserData()->karyawan->id);
+		// $pegawai = Pegawai_model::with('absensisToday')->find(getUserData()->pegawai->id);
+		$pegawai = helper()->pegawaiAbsensisToday();
 
-		return blade('absensi.index', compact(['karyawan']));
+		return blade('absensi.index', compact(['pegawai']));
 	}
 
 	public function absen()
 	{
-		$karyawan = Karyawan_model::with('absensisToday')->find(getUserData()->karyawan->id);
-		$absensisToday = $karyawan->absensisToday;
+		$pegawai = Pegawai_model::with('absensisToday')->find(getUserData()->pegawai->id);
+		$absensisToday = $pegawai->absensisToday;
 		$countAbsensisToday = count($absensisToday);
 
 		if ($countAbsensisToday == 0) {
@@ -38,7 +39,7 @@ class Absensi extends CI_Controller {
         }
 
 		$requestData = [];
-		$requestData['id_karyawan'] = getUserData()->karyawan->id;
+		$requestData['id_pegawai'] = getUserData()->pegawai->id;
 		$requestData['lat'] = $this->input->post('lat');
 		$requestData['lng'] = $this->input->post('lng');
 		$requestData['lokasi'] = $this->input->post('lokasi');

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Illuminate\Database\Capsule\Manager as DB;
 
-use application\eloquents\Karyawan as Karyawan_model;
+use application\eloquents\Pegawai as Pegawai_model;
 
 class Log extends CI_Controller {
 
@@ -17,8 +17,8 @@ class Log extends CI_Controller {
 		]);
 
 		if ($validator->passes()) {
-			$Karyawan = Karyawan_model::where(['nip' => $requestData['nip']])->first();
-			if (!($Karyawan && $Karyawan->user && password_verify($requestData['password'], $Karyawan->user->password))) {
+			$pegawai = Pegawai_model::where(['nip' => $requestData['nip']])->first();
+			if (!($pegawai && $pegawai->user && password_verify($requestData['password'], $pegawai->user->password))) {
 				$validator->errors()->add('nip', 'NIP / Password Salah !!!');
 				$validator->errors()->add('password', 'NIP / Password Salah !!!');
 			}
@@ -29,7 +29,7 @@ class Log extends CI_Controller {
 			$this->session->set_flashdata('old', $requestData);
 		} else {
 			$this->session->set_userdata([
-				'userID' => $Karyawan->user->id,
+				'userID' => $pegawai->user->id,
 				'login' => true,
 			]);
 		}

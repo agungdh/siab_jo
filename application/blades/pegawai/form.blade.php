@@ -11,8 +11,8 @@
 
 	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['nip']) {
 		$value = ci()->session->flashdata('old')['nip'];
-	} elseif (isset($karyawan) && $karyawan['nip']) {
-		$value = $karyawan['nip'];
+	} elseif (isset($pegawai) && $pegawai['nip']) {
+		$value = $pegawai['nip'];
 	} else {
 		$value = '';
 	}
@@ -35,8 +35,8 @@
 
 	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['nama']) {
 		$value = ci()->session->flashdata('old')['nama'];
-	} elseif (isset($karyawan) && $karyawan['nama']) {
-		$value = $karyawan['nama'];
+	} elseif (isset($pegawai) && $pegawai['nama']) {
+		$value = $pegawai['nama'];
 	} else {
 		$value = '';
 	}

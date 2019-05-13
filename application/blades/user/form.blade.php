@@ -1,28 +1,28 @@
 <div class="box-body">
 
 	@php
-	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('id_karyawan')) {
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('id_pegawai')) {
 		$class = 'form-group has-feedback has-error';
-		$message = ci()->session->flashdata('errors')->first('id_karyawan');
+		$message = ci()->session->flashdata('errors')->first('id_pegawai');
 	} else {
 		$class = 'form-group has-feedback';
 		$message = '';
 	}
 
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['id_karyawan']) {
-		$value = ci()->session->flashdata('old')['id_karyawan'];
-	} elseif (isset($user) && $user['id_karyawan']) {
-		$value = $user['id_karyawan'];
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['id_pegawai']) {
+		$value = ci()->session->flashdata('old')['id_pegawai'];
+	} elseif (isset($user) && $user['id_pegawai']) {
+		$value = $user['id_pegawai'];
 	} else {
 		$value = '';
 	}
 	@endphp
 	<div class="{{$class}}">
-		<label for="id_karyawan" data-toggle="tooltip" title="{{$message}}">Karyawan</label>
+		<label for="id_pegawai" data-toggle="tooltip" title="{{$message}}">Pegawai</label>
 		<div data-toggle="tooltip" title="{{$message}}">
-			<select class="form-control select2" name="id_karyawan">
-				<option {{$value == '' ? 'selected' : null}} value="">Pilih karyawan</option>
-				@foreach($karyawans as $item)
+			<select class="form-control select2" name="id_pegawai">
+				<option {{$value == '' ? 'selected' : null}} value="">Pilih Pegawai</option>
+				@foreach($pegawais as $item)
 				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{$item->nip}} - {{$item->nama}}</option>
 				@endforeach
 			</select>
@@ -52,7 +52,7 @@
 			<select class="form-control select2" name="level">
 				<option {{$value == '' ? 'selected' : null}} value="">Pilih Level</option>
 				<option {{$value == 'a' ? 'selected' : null}} value="a">Admin</option>
-				<option {{$value == 'k' ? 'selected' : null}} value="k">Karyawan</option>
+				<option {{$value == 'p' ? 'selected' : null}} value="p">Pegawai</option>
 			</select>
 		</div>
 	</div>

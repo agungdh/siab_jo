@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\User as User_model;
-use application\eloquents\Karyawan as Karyawan_model;
 
 class Profil extends CI_Controller {
 

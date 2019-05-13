@@ -3,25 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\Absensi as Absensi_model;
-use application\eloquents\Karyawan as Karyawan_model;
+use application\eloquents\Pegawai as Pegawai_model;
 
 class Riwayatabsensi extends CI_Controller {
 
 	public function index()
 	{	
-		$karyawans = Karyawan_model::all();
+		$pegawais = Pegawai_model::all();
 		$userData = getUserData();
 
-		return blade('riwayatabsensi.index', compact(['karyawans', 'userData']));
+		return blade('riwayatabsensi.index', compact(['pegawais', 'userData']));
 	}
 
-	public function getDataAbsensi($id_karyawan = "0", $tanggal = "0", $sampai = "0")
+	public function getDataAbsensi($id_pegawai = "0", $tanggal = "0", $sampai = "0")
 	{
 		$datas = new Absensi_model();
-		$datas = $datas->with('karyawan');
+		$datas = $datas->with('pegawai');
 
-		if ($id_karyawan != '0') {
-			$datas = $datas->where('id_karyawan', $id_karyawan);
+		if ($id_pegawai != '0') {
+			$datas = $datas->where('id_pegawai', $id_pegawai);
 		}
 
 		if ($tanggal != '0' && $sampai != '0') {

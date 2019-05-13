@@ -4,20 +4,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\QueryException;
 
-use application\eloquents\Karyawan as Karyawan_model;
+use application\eloquents\Pegawai as Pegawai_model;
 
-class Karyawan extends CI_Controller {
+class Pegawai extends CI_Controller {
 
 	public function index()
 	{
-		$karyawans = Karyawan_model::all();
+		$pegawais = Pegawai_model::all();
 
-		return blade('karyawan.index', compact(['karyawans']));
+		return blade('pegawai.index', compact(['pegawais']));
 	}
 
 	public function tambah()
 	{
-		return blade('karyawan.tambah', compact([]));
+		return blade('pegawai.tambah', compact([]));
 	}
 
 	public function aksitambah()
@@ -25,11 +25,13 @@ class Karyawan extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
+			'id_golongan' => 'required',
+			'id_eselon' => 'required',
 			'nip' => 'required',
 			'nama' => 'required',
 		]);
 
-		if (Karyawan_model::where(['nip' => $requestData['nip']])->first()) {
+		if (Pegawai_model::where(['nip' => $requestData['nip']])->first()) {
 			$validator->errors()->add('nip', 'NIP sudah ada !!!');
 		}
 
@@ -37,10 +39,10 @@ class Karyawan extends CI_Controller {
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
 			
-			redirect(base_url('karyawan/tambah'));
+			redirect(base_url('pegawai/tambah'));
 		}
 
-		Karyawan_model::insert($requestData);
+		Pegawai_model::insert($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -51,28 +53,30 @@ class Karyawan extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('pegawai'));
 	}
 
 	public function ubah($id)
 	{
-		$karyawan = Karyawan_model::find($id);
+		$pegawai = Pegawai_model::find($id);
 
-		return blade('karyawan.ubah', compact(['karyawan']));
+		return blade('pegawai.ubah', compact(['pegawai']));
 	}
 
 	public function aksiubah($id)
 	{
-		$karyawan = Karyawan_model::find($id);
+		$pegawai = Pegawai_model::find($id);
 
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
+			'id_golongan' => 'required',
+			'id_eselon' => 'required',
 			'nip' => 'required',
 			'nama' => 'required',
 		]);
 
-		if ($requestData['nip'] != $karyawan->nip && Karyawan_model::where(['nip' => $requestData['nip']])->first()) {
+		if ($requestData['nip'] != $pegawai->nip && Pegawai_model::where(['nip' => $requestData['nip']])->first()) {
 			$validator->errors()->add('nip', 'NIP sudah ada !!!');
 		}
 
@@ -80,10 +84,10 @@ class Karyawan extends CI_Controller {
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
 			
-			redirect(base_url('karyawan/ubah/' . $id));
+			redirect(base_url('pegawai/ubah/' . $id));
 		}
 
-		Karyawan_model::where('id', $id)->update($requestData);
+		Pegawai_model::where('id', $id)->update($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -94,13 +98,13 @@ class Karyawan extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('pegawai'));
 	}
 
 	public function aksihapus($id)
 	{
 		try {
-			Karyawan_model::where('id', $id)->delete();
+			Pegawai_model::where('id', $id)->delete();
 		} catch (QueryException $exception) {
             $this->session->set_flashdata(
 			'alert',
@@ -110,7 +114,7 @@ class Karyawan extends CI_Controller {
                 'class' => 'error',
 			]);
 
-			redirect(base_url('karyawan'));
+			redirect(base_url('pegawai'));
         }
 
 		$this->session->set_flashdata(
@@ -122,6 +126,6 @@ class Karyawan extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('karyawan'));
+		redirect(base_url('pegawai'));
 	}
 }

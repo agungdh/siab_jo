@@ -3,9 +3,15 @@ namespace application\classes;
 
 use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\HariLibur as HariLibur_model;
+use application\eloquents\User as User_model;
 
 class Helper extends \agungdh\Pustaka
 {
+	public function pegawaiAbsensisToday()
+	{
+		return User_model::with('pegawai.absensisToday')->find(ci()->session->userID)->pegawai;
+	}
+
 	public function apakahLibur()
 	{
 		$checkForLibur = DB::table('hari_libur')->where('tanggal', date('Y-m-d'))->first();

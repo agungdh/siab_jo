@@ -32,9 +32,9 @@ User
                 <tbody>
                 	@foreach($users as $item)
                 	<tr>
-                        <td>{{$item->karyawan->nip}}</td>
-                        <td>{{$item->karyawan->nama}}</td>
-                        <td>{{$item->level == 'a' ? 'Admin' : 'Karyawan'}}</td>
+                        <td>{{$item->pegawai->nip}}</td>
+                        <td>{{$item->pegawai->nama}}</td>
+                        <td>{{$item->level == 'a' ? 'Admin' : 'Pegawai'}}</td>
                 		
                 		<td>
                         <a class="btn btn-primary btn-sm" href="{{base_url()}}user/ubah/{{$item->id}}">
