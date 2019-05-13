@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: siab_jo
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Mon, 13 May 2019 02:48:21 +0200
+-- Date: Mon, 13 May 2019 02:57:27 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,15 +24,15 @@
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `absensi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_karyawan` int(11) NOT NULL,
+  `id_pegawai` int(11) NOT NULL,
   `waktu` datetime NOT NULL,
   `tipe` enum('b','p') NOT NULL COMMENT 'b => berangkat,p => pulang',
   `lat` varchar(191) NOT NULL,
   `lng` varchar(191) NOT NULL,
   `lokasi` enum('d','l') NOT NULL COMMENT 'd => dalam,l => luar',
   PRIMARY KEY (`id`),
-  KEY `id_karyawan` (`id_karyawan`),
-  CONSTRAINT `absensi_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id`)
+  KEY `id_pegawai` (`id_pegawai`),
+  CONSTRAINT `absensi_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -43,12 +43,69 @@ CREATE TABLE `absensi` (
 LOCK TABLES `absensi` WRITE;
 /*!40000 ALTER TABLE `absensi` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `absensi` VALUES (6,10,'2019-04-25 09:42:44','p','-5.093354','105.283969','d'),(7,10,'2019-05-06 03:53:13','b','-5.0931899','105.2840523','d'),(8,10,'2019-05-06 03:53:24','p','-5.0931899','105.2840523','d'),(9,10,'2019-05-09 12:38:18','b','-5.3936128','105.259008','l'),(12,11,'2019-05-09 17:42:05','p','-5.3936128','105.259008','l');
 /*!40000 ALTER TABLE `absensi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `absensi` with 5 row(s)
+-- Dumped table `absensi` with 0 row(s)
+--
+
+--
+-- Table structure for table `eselon`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `eselon` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `eselon` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `eselon`
+--
+
+LOCK TABLES `eselon` WRITE;
+/*!40000 ALTER TABLE `eselon` DISABLE KEYS */;
+SET autocommit=0;
+INSERT INTO `eselon` VALUES (1,'Ia'),(2,'Ib'),(3,'IIa'),(4,'IIb'),(5,'IIIa'),(6,'IIIb'),(7,'IVa'),(8,'IVb'),(9,'Va');
+/*!40000 ALTER TABLE `eselon` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `eselon` with 9 row(s)
+--
+
+--
+-- Table structure for table `golongan`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `golongan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `golongan` varchar(255) NOT NULL,
+  `ruang` varchar(255) NOT NULL,
+  `pangkat` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `golongan`
+--
+
+LOCK TABLES `golongan` WRITE;
+/*!40000 ALTER TABLE `golongan` DISABLE KEYS */;
+SET autocommit=0;
+INSERT INTO `golongan` VALUES (1,'I','a','Juru Muda'),(2,'I','b','Juru Muda Tingkat 1'),(3,'I','c','Juru'),(4,'I','d','Juru Tingkat 1'),(5,'II','a','Pengatur Muda'),(6,'II','b','Pengatur Muda Tingat 1'),(7,'II','c','Pengatur'),(8,'II','d','Pengatur Tingkat 1'),(9,'III','a','Penata Muda'),(10,'III','b','Penata Muda Tingkat 1'),(11,'III','c','Penata'),(12,'III','d','Penata Tingkat 1'),(13,'IV','a','Pembina'),(14,'IV','b','Pembina Tingkat 1'),(15,'IV','c','Pembina Utama Muda'),(16,'IV','d','Pembina Utama Madya'),(17,'IV','e','Pembina Utama');
+/*!40000 ALTER TABLE `golongan` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `golongan` with 17 row(s)
 --
 
 --
@@ -82,33 +139,38 @@ COMMIT;
 --
 
 --
--- Table structure for table `karyawan`
+-- Table structure for table `pegawai`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `karyawan` (
+CREATE TABLE `pegawai` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_golongan` int(11) NOT NULL,
+  `id_eselon` int(11) NOT NULL,
   `nip` varchar(191) NOT NULL,
   `nama` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `nip` (`nip`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `nip` (`nip`),
+  KEY `id_eselon` (`id_eselon`),
+  KEY `id_golongan` (`id_golongan`),
+  CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_eselon`) REFERENCES `eselon` (`id`),
+  CONSTRAINT `pegawai_ibfk_2` FOREIGN KEY (`id_golongan`) REFERENCES `golongan` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `karyawan`
+-- Dumping data for table `pegawai`
 --
 
-LOCK TABLES `karyawan` WRITE;
-/*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
+LOCK TABLES `pegawai` WRITE;
+/*!40000 ALTER TABLE `pegawai` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `karyawan` VALUES (10,'15753003','Agung Sapto Margono Dh'),(11,'15753016','Bintang AFFS'),(12,'15753067','Tika YK'),(13,'15753001','Dewaks'),(14,'15753002','Diah');
-/*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pegawai` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `karyawan` with 5 row(s)
+-- Dumped table `pegawai` with 0 row(s)
 --
 
 --
@@ -119,12 +181,12 @@ COMMIT;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_karyawan` int(11) NOT NULL,
+  `id_pegawai` int(11) NOT NULL,
   `password` varchar(191) NOT NULL,
   `level` enum('a','k') NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_karyawan` (`id_karyawan`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id`)
+  KEY `id_pegawai` (`id_pegawai`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -135,12 +197,11 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (4,11,'$2y$10$E.7z9Ko8q5OcMSvhHdeE.ucZ8.eTEMxwp8xEQ2k7NPfIpmZpZgFiK','k'),(6,10,'$2y$10$uKp4/uLuA4GAXBCiInpxvuTy30bZbd6dQzE3eEis1OlmRREcySr3K','a');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `user` with 2 row(s)
+-- Dumped table `user` with 0 row(s)
 --
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -152,4 +213,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 13 May 2019 02:48:21 +0200
+-- Dump completed on: Mon, 13 May 2019 02:57:27 +0200
