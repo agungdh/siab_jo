@@ -26,4 +26,12 @@ class Pegawai extends Eloquent {
     public function absensisTodayPulang(){
         return $this->hasOne('application\eloquents\Absensi', 'id_pegawai')->whereRaw('date(waktu) = date(now())')->where('tipe', 'p');
     }
+
+    public function eselon(){
+        return $this->belongsTo('application\eloquents\Eselon', 'id_eselon');
+    }
+
+    public function golongan(){
+        return $this->belongsTo('application\eloquents\Golongan', 'id_golongan');
+    }
 }

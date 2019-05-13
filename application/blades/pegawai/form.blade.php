@@ -25,6 +25,64 @@
 	</div>
 
 	@php
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('id_golongan')) {
+		$class = 'form-group has-feedback has-error';
+		$message = ci()->session->flashdata('errors')->first('id_golongan');
+	} else {
+		$class = 'form-group has-feedback';
+		$message = '';
+	}
+
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['id_golongan']) {
+		$value = ci()->session->flashdata('old')['id_golongan'];
+	} elseif (isset($pegawai) && $pegawai['id_golongan']) {
+		$value = $pegawai['id_golongan'];
+	} else {
+		$value = '';
+	}
+	@endphp
+	<div class="{{$class}}">
+		<label for="id_golongan" data-toggle="tooltip" title="{{$message}}">Golongan</label>
+		<div data-toggle="tooltip" title="{{$message}}">
+			<select class="form-control select2" name="id_golongan">
+				<option {{$value == '' ? 'selected' : null}} value="">Pilih Golongan</option>
+				@foreach($golongans as $item)
+				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{$item->golongan}}/{{$item->ruang}} {{$item->pangkat}}</option>
+				@endforeach
+			</select>
+		</div>
+	</div>
+
+	@php
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('id_eselon')) {
+		$class = 'form-group has-feedback has-error';
+		$message = ci()->session->flashdata('errors')->first('id_eselon');
+	} else {
+		$class = 'form-group has-feedback';
+		$message = '';
+	}
+
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['id_eselon']) {
+		$value = ci()->session->flashdata('old')['id_eselon'];
+	} elseif (isset($pegawai) && $pegawai['id_eselon']) {
+		$value = $pegawai['id_eselon'];
+	} else {
+		$value = '';
+	}
+	@endphp
+	<div class="{{$class}}">
+		<label for="id_eselon" data-toggle="tooltip" title="{{$message}}">Eselon</label>
+		<div data-toggle="tooltip" title="{{$message}}">
+			<select class="form-control select2" name="id_eselon">
+				<option {{$value == '' ? 'selected' : null}} value="">Pilih Eselon</option>
+				@foreach($eselons as $item)
+				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{$item->eselon}}</option>
+				@endforeach
+			</select>
+		</div>
+	</div>
+
+	@php
 	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('nama')) {
 		$class = 'form-group has-feedback has-error';
 		$message = ci()->session->flashdata('errors')->first('nama');

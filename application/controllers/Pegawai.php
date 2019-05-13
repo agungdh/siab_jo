@@ -5,19 +5,24 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\QueryException;
 
 use application\eloquents\Pegawai as Pegawai_model;
+use application\eloquents\Golongan as Golongan_model;
+use application\eloquents\Eselon as Eselon_model;
 
 class Pegawai extends CI_Controller {
 
 	public function index()
 	{
-		$pegawais = Pegawai_model::all();
-
+		$pegawais = Pegawai_model::with('golongan', 'eselon')->get();
+		
 		return blade('pegawai.index', compact(['pegawais']));
 	}
 
 	public function tambah()
 	{
-		return blade('pegawai.tambah', compact([]));
+		$golongans = Golongan_model::all();
+		$eselons = Eselon_model::all();
+
+		return blade('pegawai.tambah', compact(['golongans', 'eselons']));
 	}
 
 	public function aksitambah()
@@ -26,7 +31,6 @@ class Pegawai extends CI_Controller {
 		
 		$validator = validator()->make($requestData, [
 			'id_golongan' => 'required',
-			'id_eselon' => 'required',
 			'nip' => 'required',
 			'nama' => 'required',
 		]);
@@ -41,6 +45,8 @@ class Pegawai extends CI_Controller {
 			
 			redirect(base_url('pegawai/tambah'));
 		}
+
+		$requestData['id_eselon'] = $requestData['id_eselon'] ?: null;
 
 		Pegawai_model::insert($requestData);
 		
@@ -58,9 +64,11 @@ class Pegawai extends CI_Controller {
 
 	public function ubah($id)
 	{
+		$golongans = Golongan_model::all();
+		$eselons = Eselon_model::all();
 		$pegawai = Pegawai_model::find($id);
 
-		return blade('pegawai.ubah', compact(['pegawai']));
+		return blade('pegawai.ubah', compact(['pegawai', 'golongans', 'eselons']));
 	}
 
 	public function aksiubah($id)
@@ -71,7 +79,6 @@ class Pegawai extends CI_Controller {
 		
 		$validator = validator()->make($requestData, [
 			'id_golongan' => 'required',
-			'id_eselon' => 'required',
 			'nip' => 'required',
 			'nama' => 'required',
 		]);
@@ -86,6 +93,8 @@ class Pegawai extends CI_Controller {
 			
 			redirect(base_url('pegawai/ubah/' . $id));
 		}
+
+		$requestData['id_eselon'] = $requestData['id_eselon'] ?: null;
 
 		Pegawai_model::where('id', $id)->update($requestData);
 		

@@ -25,6 +25,8 @@ Pegawai
 	                <tr>
 	                  <th>NIP</th>
                       <th>Nama</th>
+                      <th>Golongan/Pangkat</th>
+                      <th>Eselon</th>
 	                  <th>Proses</th>
 	                </tr>
                 </thead>
@@ -33,6 +35,8 @@ Pegawai
                 	<tr>
                 		<td>{{$item->nip}}</td>
                         <td>{{$item->nama}}</td>
+                        <td>{{$item->golongan->golongan}}/{{$item->golongan->ruang}} {{$item->golongan->pangkat}}</td>
+                        <td>{{$item->eselon ? $item->eselon->eselon : '-'}}</td>
                 		
                 		<td>
                         <a class="btn btn-primary btn-sm" href="{{base_url()}}pegawai/ubah/{{$item->id}}">
