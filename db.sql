@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: siab_jo
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Wed, 08 May 2019 10:50:15 +0200
+-- Date: Mon, 13 May 2019 02:48:21 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -33,7 +33,7 @@ CREATE TABLE `absensi` (
   PRIMARY KEY (`id`),
   KEY `id_karyawan` (`id_karyawan`),
   CONSTRAINT `absensi_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,12 +43,12 @@ CREATE TABLE `absensi` (
 LOCK TABLES `absensi` WRITE;
 /*!40000 ALTER TABLE `absensi` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `absensi` VALUES (5,10,'2019-04-25 09:42:27','b','-5.093354','105.283969','d'),(6,10,'2019-04-25 09:42:44','p','-5.093354','105.283969','d'),(7,10,'2019-05-06 03:53:13','b','-5.0931899','105.2840523','d'),(8,10,'2019-05-06 03:53:24','p','-5.0931899','105.2840523','d');
+INSERT INTO `absensi` VALUES (6,10,'2019-04-25 09:42:44','p','-5.093354','105.283969','d'),(7,10,'2019-05-06 03:53:13','b','-5.0931899','105.2840523','d'),(8,10,'2019-05-06 03:53:24','p','-5.0931899','105.2840523','d'),(9,10,'2019-05-09 12:38:18','b','-5.3936128','105.259008','l'),(12,11,'2019-05-09 17:42:05','p','-5.3936128','105.259008','l');
 /*!40000 ALTER TABLE `absensi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `absensi` with 4 row(s)
+-- Dumped table `absensi` with 5 row(s)
 --
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (4,11,'$2y$10$ZBDR5y11FP9UrG5uFsfoXOMB3xwSNgALDP.7W4nMk2nOVxKjPyjBW','k'),(6,10,'$2y$10$uKp4/uLuA4GAXBCiInpxvuTy30bZbd6dQzE3eEis1OlmRREcySr3K','a');
+INSERT INTO `user` VALUES (4,11,'$2y$10$E.7z9Ko8q5OcMSvhHdeE.ucZ8.eTEMxwp8xEQ2k7NPfIpmZpZgFiK','k'),(6,10,'$2y$10$uKp4/uLuA4GAXBCiInpxvuTy30bZbd6dQzE3eEis1OlmRREcySr3K','a');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -152,4 +152,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Wed, 08 May 2019 10:50:15 +0200
+-- Dump completed on: Mon, 13 May 2019 02:48:21 +0200
