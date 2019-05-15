@@ -18,7 +18,7 @@
 		"ifsnop/mysqldump-php": "^2.7",
 		"thamaraiselvam/mysql-import": "^1.0",
 		"dompdf/dompdf": "^0.8.3",
-		"geekcom/phpjasper": "^3.0"
+		"geekcom/phpjasper": "2.6"
 	},
     "autoload": {
     	"psr-4": {
