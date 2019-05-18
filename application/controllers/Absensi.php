@@ -7,9 +7,15 @@ use Illuminate\Database\QueryException;
 use application\eloquents\Pegawai as Pegawai_model;
 
 class Absensi extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+
+		helper()->auth(['a', 'p']);
+	}
+
 	public function index()
 	{
-		// $pegawai = Pegawai_model::with('absensisToday')->find(getUserData()->pegawai->id);
 		$pegawai = helper()->pegawaiAbsensisToday();
 
 		return blade('absensi.index', compact(['pegawai']));

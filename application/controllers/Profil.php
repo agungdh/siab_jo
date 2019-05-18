@@ -5,7 +5,13 @@ use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\User as User_model;
 
 class Profil extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
 
+		helper()->auth(['a', 'p']);
+	}
+	
 	public function index()
 	{
 		$user = getUserData();

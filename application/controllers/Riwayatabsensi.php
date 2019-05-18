@@ -7,6 +7,13 @@ use application\eloquents\Pegawai as Pegawai_model;
 
 class Riwayatabsensi extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+
+		helper()->auth(['a', 'p']);
+	}
+
 	public function index()
 	{	
 		$pegawais = Pegawai_model::all();

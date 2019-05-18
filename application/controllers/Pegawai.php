@@ -9,6 +9,12 @@ use application\eloquents\Golongan as Golongan_model;
 use application\eloquents\Eselon as Eselon_model;
 
 class Pegawai extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+
+		helper()->auth(['a']);
+	}
 
 	public function index()
 	{

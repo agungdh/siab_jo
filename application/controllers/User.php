@@ -8,6 +8,12 @@ use application\eloquents\User as User_model;
 use application\eloquents\Pegawai as Pegawai_model;
 
 class User extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+
+		helper()->auth(['a']);
+	}
 
 	public function index()
 	{

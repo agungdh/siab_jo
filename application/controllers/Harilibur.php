@@ -5,6 +5,13 @@ use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\HariLibur as HariLibur_model;
 
 class Harilibur extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+
+		helper()->auth(['a']);
+	}
+
 	public function index()
 	{
 		return blade('harilibur.index', compact([]));
