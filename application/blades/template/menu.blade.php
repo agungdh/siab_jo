@@ -10,6 +10,7 @@
   </a>
 </li>
 
+@if($userData->level == 'a')
 <li class="treeview">
       <a href="#">
         <i class="fa fa-users"></i>
@@ -40,3 +41,4 @@
 
       </ul>
 </li>
+@endif
