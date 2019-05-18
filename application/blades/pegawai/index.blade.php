@@ -27,6 +27,7 @@ Pegawai
                       <th>Nama</th>
                       <th>Golongan/Pangkat</th>
                       <th>Eselon</th>
+                      <th>Jabatan</th>
 	                  <th>Proses</th>
 	                </tr>
                 </thead>
@@ -37,6 +38,7 @@ Pegawai
                         <td>{{$item->nama}}</td>
                         <td>{{$item->golongan->golongan}}/{{$item->golongan->ruang}} {{$item->golongan->pangkat}}</td>
                         <td>{{$item->eselon ? $item->eselon->eselon : '-'}}</td>
+                        <td>{{$item->jabatan}}</td>
                 		
                 		<td>
                         <a class="btn btn-primary btn-sm" href="{{base_url()}}pegawai/ubah/{{$item->id}}">

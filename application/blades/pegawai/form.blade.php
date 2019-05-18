@@ -105,5 +105,41 @@
 			<input type="text" name="nama" class="form-control" placeholder="Isi Nama" id="nama" value="{{$value}}">
 		</div>
 	</div>
+
+	@php
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('jabatan')) {
+		$class = 'form-group has-feedback has-error';
+		$message = ci()->session->flashdata('errors')->first('jabatan');
+	} else {
+		$class = 'form-group has-feedback';
+		$message = '';
+	}
+
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['jabatan']) {
+		$value = ci()->session->flashdata('old')['jabatan'];
+	} elseif (isset($pegawai) && $pegawai['jabatan']) {
+		$value = $pegawai['jabatan'];
+	} else {
+		$value = '';
+	}
+	@endphp
+	<div class="{{$class}}">
+		<label for="jabatan" data-toggle="tooltip" title="{{$message}}">Jabatan</label>
+		<div data-toggle="tooltip" title="{{$message}}">
+			<input type="text" name="jabatan" class="form-control" placeholder="Isi Jabatan" id="jabatan" value="{{$value}}">
+		</div>
+	</div>
 	
 </div>
+
+@section('js')
+<script type="text/javascript">
+$("#jabatan").easyAutocomplete({
+  url: function(phrase) {
+    return "{{base_url()}}pegawai/getJabatan/" + phrase;
+  },
+  getValue: "name",
+  requestDelay: 200
+});
+</script>
+@endsection

@@ -37,6 +37,8 @@ if(ci()->session->login) {
   <link rel="stylesheet" href="{{base_url()}}assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
   <!-- Bootstrap Datetime Picker -->
   <link rel="stylesheet" href="{{base_url()}}assets/AdminLTE/dist/css/AdminLTE.min.css">
+  <!-- EasyAutoComplete -->
+  <link rel="stylesheet" href="{{base_url()}}assets/EasyAutocomplete-1.3.5/easy-autocomplete.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
@@ -201,6 +203,8 @@ if(ci()->session->login) {
 
 <!-- jQuery 3 -->
 <script src="{{base_url()}}assets/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- EasyAutoComplete -->
+<script src="{{base_url()}}assets/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{base_url()}}assets/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Select2 -->

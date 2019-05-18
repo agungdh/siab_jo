@@ -16,6 +16,12 @@ class Pegawai extends CI_Controller {
 		helper()->auth(['a']);
 	}
 
+	public function getJabatan($phrase)
+	{
+		$datas = DB::select("SELECT DISTINCT(jabatan) name FROM pegawai WHERE jabatan like ?", ["%" . $phrase . "%"]);
+		echo json_encode($datas);
+	}
+
 	public function index()
 	{
 		$pegawais = Pegawai_model::with('golongan', 'eselon')->get();
@@ -39,6 +45,7 @@ class Pegawai extends CI_Controller {
 			'id_golongan' => 'required',
 			'nip' => 'required',
 			'nama' => 'required',
+			'jabatan' => 'required',
 		]);
 
 		if (Pegawai_model::where(['nip' => $requestData['nip']])->first()) {
@@ -87,6 +94,7 @@ class Pegawai extends CI_Controller {
 			'id_golongan' => 'required',
 			'nip' => 'required',
 			'nama' => 'required',
+			'jabatan' => 'required',
 		]);
 
 		if ($requestData['nip'] != $pegawai->nip && Pegawai_model::where(['nip' => $requestData['nip']])->first()) {
