@@ -36,6 +36,7 @@
 			@php
 			$terlambat = DB()
 							->table('absensi')
+							->where('id_pegawai', $item->id)
 							->where('tipe', 'b')
 							->whereNull('invalidated')
 							->whereRaw('TIME(waktu) > ?
@@ -47,23 +48,18 @@
 											$tahun,
 										])
 							->get();
-			$totalTerlambat = count($terlambat);
 			
 			$durasiTerlambat = 0;
 			foreach ($terlambat as $itemTerlambat) {
-				$tempTimeDiff = 0;
-				
-			}
+				$harus = helper()->convertJamMenitKeMenit(env('WAKTU_BERANGKAT'));
+				$berangkat = helper()->convertJamMenitKeMenit(date('H:i', strtotime($itemTerlambat->waktu)));
 
-			dd(
-				compact(
-					'terlambat',
-					'totalTerlambat',
-					'durasiTerlambat',
-				)
-			);
+				if ($berangkat > $harus) {
+					$durasiTerlambat += abs($harus - $berangkat);
+				}
+			}
 			@endphp
-			<td>{{$i}}</td>
+			<td>{{$durasiTerlambat}} Menit</td>
 			<td>{{$i}}</td>
 			<td>{{$i}}</td>
 			<td>{{$i}}</td>

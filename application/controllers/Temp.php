@@ -24,7 +24,7 @@ class Temp extends CI_Controller {
 		// 		(int)str_replace(':', '', env('WAKTU_BERANGKAT'))
 		// 	)
 		// ]);
-		dd(abs(helper()->convertJamMenitKeMenit('08:00') - helper()->convertJamMenitKeMenit('16:00')));
+		// dd(abs(helper()->convertJamMenitKeMenit('08:00') - helper()->convertJamMenitKeMenit('16:00')));
 		$bulan = 5;
 		$tahun = 2019;
 		$pegawais = Pegawai_model::with([
