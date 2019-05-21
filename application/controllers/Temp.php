@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\HariLibur as HariLibur_model;
+use application\eloquents\Pegawai as Pegawai_model;
 use PHPJasper\PHPJasper;
 
 class Temp extends CI_Controller {
@@ -13,35 +14,24 @@ class Temp extends CI_Controller {
 		dd($datas);
 	}
 
-	public function jasper()
+	public function reportbulanan()
 	{
-		// $input = FCPATH . 'vendor\geekcom\phpjasper\examples\json.jrxml';   
-		// $jasper = new PHPJasper;
-		// $jasper->compile($input)->execute();
-
-		$input = FCPATH . 'vendor\geekcom\phpjasper\examples\json.jrxml';   
-		$output = FCPATH . 'vendor\geekcom\phpjasper\examples';   
-
-		$data_file = FCPATH . 'vendor\geekcom\phpjasper\examples\contacts.json';   
-		$options = [
-		    'format' => ['pdf'],
-		    'params' => [],
-		    'locale' => 'en',
-		    'db_connection' => [
-		        'driver' => 'json',
-		        'data_file' => $data_file,
-		        'json_query' => 'contacts.person'
-		    ]
-		];
-
-		$jasper = new PHPJasper;
-
-		$jasper->process(
-		    $input,
-		    $output,
-		    $options
-		)->execute();
-
-		// dd($jasper);
+		// $waktuPulang = str_replace(':', '', env('WAKTU_PULANG'));
+		// dd([
+		// 	abs(
+		// 		(int)str_replace(':', '', env('WAKTU_PULANG'))
+		// 		- 
+		// 		(int)str_replace(':', '', env('WAKTU_BERANGKAT'))
+		// 	)
+		// ]);
+		dd(abs(helper()->convertJamMenitKeMenit('08:00') - helper()->convertJamMenitKeMenit('16:00')));
+		$bulan = 5;
+		$tahun = 2019;
+		$pegawais = Pegawai_model::with([
+			'golongan', 
+			'eselon',
+		])->get();
+		
+		return blade('dashboard.absenbulanan', compact(['pegawais', 'bulan', 'tahun']));
 	}
 }

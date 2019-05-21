@@ -46,3 +46,10 @@ if (!function_exists('helper')) {
         return new Helper;
     }
  }
+
+ if (!function_exists('DB')) {
+    function DB()
+    {
+        return new DB;
+    }
+ }
