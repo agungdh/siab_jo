@@ -148,7 +148,11 @@ Absensi
 $("form").submit(function(e) {
     e.preventDefault();
 
-    @if(helper()->apakahLibur())
+    @if(helper()->apakahHariIniIjin())
+    swal('Error', 'Hari Ini Anda Ijin Tidak Absen !!!', 'error');
+
+    return false;
+    @elseif(helper()->apakahLibur())
     swal('Error', 'Hari Ini Libur !!!', 'error');
 
     return false;
