@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: siab_jo
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Sat, 18 May 2019 11:32:01 +0200
+-- Date: Tue, 21 May 2019 08:29:00 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -117,10 +117,10 @@ COMMIT;
 CREATE TABLE `hari_libur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tanggal` date NOT NULL,
-  `keterangan` varchar(191) DEFAULT NULL,
+  `keterangan` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tanggal` (`tanggal`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,6 +136,38 @@ UNLOCK TABLES;
 COMMIT;
 
 -- Dumped table `hari_libur` with 72 row(s)
+--
+
+--
+-- Table structure for table `ijin_absensi`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ijin_absensi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pegawai` int(11) NOT NULL,
+  `tipe` enum('s','i','c') NOT NULL,
+  `tanggal` date NOT NULL,
+  `keterangan` text,
+  PRIMARY KEY (`id`),
+  KEY `id_pegawai` (`id_pegawai`),
+  CONSTRAINT `ijin_absensi_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ijin_absensi`
+--
+
+LOCK TABLES `ijin_absensi` WRITE;
+/*!40000 ALTER TABLE `ijin_absensi` DISABLE KEYS */;
+SET autocommit=0;
+/*!40000 ALTER TABLE `ijin_absensi` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `ijin_absensi` with 0 row(s)
 --
 
 --
@@ -157,7 +189,7 @@ CREATE TABLE `pegawai` (
   KEY `id_golongan` (`id_golongan`),
   CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_eselon`) REFERENCES `eselon` (`id`),
   CONSTRAINT `pegawai_ibfk_2` FOREIGN KEY (`id_golongan`) REFERENCES `golongan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,4 +248,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sat, 18 May 2019 11:32:01 +0200
+-- Dump completed on: Tue, 21 May 2019 08:29:00 +0200

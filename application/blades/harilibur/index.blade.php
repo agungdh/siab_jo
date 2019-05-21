@@ -23,8 +23,8 @@ Hari Libur
               <table class="table table-bordered table-hover datatable" style="width: 100%">
                 <thead>
 	                <tr>
-	                  <th>NIP</th>
-                      <th>Nama</th>
+	                  <th>Tanggal</th>
+                      <th>Keterangan</th>
 	                  <th>Proses</th>
 	                </tr>
                 </thead>

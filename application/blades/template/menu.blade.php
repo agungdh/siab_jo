@@ -11,6 +11,12 @@
 </li>
 
 @if($userData->level == 'a')
+<li>
+  <a href="{{ base_url() }}ijinabsensi">
+    <i class="fa fa-address-book"></i> <span>Ijin Absensi</span>
+  </a>
+</li>
+
 <li class="treeview">
       <a href="#">
         <i class="fa fa-users"></i>
