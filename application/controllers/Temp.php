@@ -24,7 +24,12 @@ class Temp extends CI_Controller {
 			'golongan', 
 			'eselon',
 		])->get();
-		
-		return blade('dashboard.absenbulanan', compact(['pegawais', 'bulan', 'tahun']));
+	
+		$dompdf = new Dompdf\Dompdf('');
+		$dompdf->set_option('defaultFont', 'Courier');
+		$dompdf->setPaper('A4', 'landscape');
+		$dompdf->loadHtml(bladeHtml('dashboard.absenbulanan', compact(['pegawais', 'bulan', 'tahun'])));
+		$dompdf->render();
+		$dompdf->stream('Absensi Pegawai BAPPEDA Pringsewu ' . helper()->tanggalIndoStringBulanTahun("{$bulan}-{$tahun}") . '.pdf');
 	}
 }

@@ -17,6 +17,17 @@ if (!function_exists('blade')) {
     }
  }
 
+if (!function_exists('bladeHtml')) {
+    function bladeHtml($view, $data = [])
+    {
+        $data['adh'] = new agungdh\Pustaka();
+        $path = APPPATH.'blades';
+        $blade = new Blade($path, APPPATH.'cache/blade');
+
+        return $blade->make($view, $data);
+    }
+ }
+
 if (!function_exists('ci')) {
     function ci()
     {
