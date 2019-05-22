@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: siab_jo
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Wed, 22 May 2019 08:26:05 +0200
+-- Date: Wed, 22 May 2019 10:03:32 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,7 +44,7 @@ CREATE TABLE `absensi` (
 LOCK TABLES `absensi` WRITE;
 /*!40000 ALTER TABLE `absensi` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `absensi` VALUES (8,1,'2019-05-21 08:00:39','b','-5.0933185','105.2840418','l',NULL),(9,1,'2019-05-22 09:55:59','p','4','2','l',NULL),(11,5,'2019-05-22 12:49:29','b','-5.0932153','105.28398059999999','l',NULL);
+INSERT INTO `absensi` VALUES (8,1,'2019-05-21 08:00:39','b','-5.0933185','105.2840418','l',NULL),(9,1,'2019-05-22 09:55:59','p','4','2','l',NULL),(11,5,'2019-05-22 12:49:29','b','-5.0932153','105.28398059999999','l','y');
 /*!40000 ALTER TABLE `absensi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -155,7 +155,7 @@ CREATE TABLE `ijin_absensi` (
   PRIMARY KEY (`id`),
   KEY `id_pegawai` (`id_pegawai`),
   CONSTRAINT `ijin_absensi_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,12 +165,12 @@ CREATE TABLE `ijin_absensi` (
 LOCK TABLES `ijin_absensi` WRITE;
 /*!40000 ALTER TABLE `ijin_absensi` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `ijin_absensi` VALUES (4,1,'c','2019-05-28',NULL);
+INSERT INTO `ijin_absensi` VALUES (4,1,'c','2019-05-28',NULL),(5,1,'s','2019-05-20',NULL),(6,1,'s','2019-05-19',NULL),(7,1,'s','2019-04-18',NULL),(8,1,'i','2019-05-05','asfaf');
 /*!40000 ALTER TABLE `ijin_absensi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `ijin_absensi` with 1 row(s)
+-- Dumped table `ijin_absensi` with 5 row(s)
 --
 
 --
@@ -251,4 +251,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Wed, 22 May 2019 08:26:05 +0200
+-- Dump completed on: Wed, 22 May 2019 10:03:32 +0200
