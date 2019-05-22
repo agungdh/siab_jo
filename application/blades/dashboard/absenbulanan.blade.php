@@ -4,8 +4,9 @@
 	<title></title>
 </head>
 <body>
-
-<table border="1">
+<h3 style="text-align: center;">Absensi Pegawai BAPPEDA Pringsewu</h3>
+<h3 style="text-align: center;">{{helper()->tanggalIndoStringBulanTahun("{$bulan}-{$tahun}")}}</h3>
+<table border="1" width="100%">
 	<thead>
 		<tr>
 			<th>NO</th>
