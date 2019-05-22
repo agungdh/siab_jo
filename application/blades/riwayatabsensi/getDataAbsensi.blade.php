@@ -18,7 +18,7 @@ $tanggal = date('YmdHisu');
             <td>{{helper()->tanggalWaktuIndo($item->waktu)}}</td>
             <td>{{$item->tipe == 'b' ? 'Berangkat' : 'Pulang'}}</td>
       		  <td>
-                <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}', '{{$item->lat}}', '{{$item->lng}}', '{{$item->pegawai->nip}} - {{$item->pegawai->nama}}', '{{$item->pegawai->id}}')">
+                <button type="button" class="btn btn-primary btn-sm" onclick="lihat('{{ helper()->tanggalWaktuIndo($item->waktu) }}', '{{ $item->tipe == 'b' ? 'Berangkat' : 'Pulang' }}', '{{$item->id}}', '{{$item->lat}}', '{{$item->lng}}', '{{$item->pegawai->nip}} - {{$item->pegawai->nama}}', '{{$item->pegawai->id}}', {{$item->invalidated ? 0 : 1}})">
                     <i class="glyphicon glyphicon-eye-open"></i>
                     Detail
                 </button>

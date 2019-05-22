@@ -58,6 +58,38 @@ class Riwayatabsensi extends CI_Controller {
 		return blade('riwayatabsensi.getDataAbsensi', compact(['datas']));
 	}
 
+	public function validate($id)
+	{
+		Absensi_model::where('id', $id)->update(['invalidated' => null]);
+
+		$this->session->set_flashdata(
+			'alert',
+			[
+				'title' => 'Sukses',
+				'message' => 'Validate Berhasil !!!',
+				'class' => 'success',
+			]
+		);
+
+		redirect(base_url('riwayatabsensi'));
+	}
+
+	public function invalidate($id)
+	{
+		Absensi_model::where('id', $id)->update(['invalidated' => 'y']);
+
+		$this->session->set_flashdata(
+			'alert',
+			[
+				'title' => 'Sukses',
+				'message' => 'Invalidate Berhasil !!!',
+				'class' => 'success',
+			]
+		);
+
+		redirect(base_url('riwayatabsensi'));
+	}
+
 	public function aksihapus($id)
 	{
 		try {

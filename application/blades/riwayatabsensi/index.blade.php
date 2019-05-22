@@ -118,9 +118,9 @@ Riwayat Absensi
 
     </div>
     <div class="modal-footer">
-      @if(getUserData()->level == 'a')
-      <button type="button" class="btn btn-danger" onclick="hapus()">Hapus</button>
-      @endif
+      <button id="btnHapus" type="button" class="btn btn-danger" onclick="hapus()">Hapus</button>
+      <button id="btnValidate" type="button" class="btn btn-success" onclick="validate()">Validate</button>
+      <button id="btnInvalidate" type="button" class="btn btn-warning" onclick="invalidate()">Invalidate</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
   </div>
@@ -130,11 +130,6 @@ Riwayat Absensi
 
 @section('js')
 <script type="text/javascript">
-  function hapus()
-  {
-    swal(state.data.id_pegawai_show);
-  }
-
   $("#filter").click(function() {
     prosesFilter();
   });
@@ -190,9 +185,20 @@ Riwayat Absensi
 
   }
 
-  function lihat(waktu, tipe, id, lat, lng, pegawai, id_pegawai) {
+  function lihat(waktu, tipe, id, lat, lng, pegawai, id_pegawai, validity) {
         state.data.id_pegawai_show = id_pegawai;
         state.data.id_absensi = id;
+        state.data.validity = validity;
+
+        if (validity == '1') {
+          $("#btnHapus").hide();
+          $("#btnValidate").hide();
+          $("#btnInvalidate").show();
+        } else if (validity == '0') {
+          $("#btnHapus").show();
+          $("#btnValidate").show();
+          $("#btnInvalidate").hide();
+        }
 
         state.data.latlng = {
             lat: parseFloat(lat),
@@ -244,6 +250,32 @@ Riwayat Absensi
         confirmButtonText: "Hapus",
       }, function(){
         window.location = "{{base_url()}}riwayatabsensi/aksihapus/" + state.data.id_absensi;
+      });
+    }
+
+    function validate(id) {
+      swal({
+        title: "Yakin Validate ???",
+        text: "Data akan divalidate !!!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#008D4C",
+        confirmButtonText: "Validate",
+      }, function(){
+        window.location = "{{base_url()}}riwayatabsensi/validate/" + state.data.id_absensi;
+      });
+    }
+
+    function invalidate(id) {
+      swal({
+        title: "Yakin Invalidate ???",
+        text: "Data akan diinvalidate !!!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#E08E0B",
+        confirmButtonText: "Invalidate",
+      }, function(){
+        window.location = "{{base_url()}}riwayatabsensi/invalidate/" + state.data.id_absensi;
       });
     }
 </script>
