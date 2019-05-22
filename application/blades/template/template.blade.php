@@ -203,6 +203,8 @@ if(ci()->session->login) {
 
 <!-- jQuery 3 -->
 <script src="{{base_url()}}assets/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- ChartJS -->
+<script src="{{base_url()}}assets/AdminLTE/bower_components/chart.js/Chart.min.js"></script>
 <!-- EasyAutoComplete -->
 <script src="{{base_url()}}assets/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
 <!-- Bootstrap 3.3.7 -->

@@ -9,61 +9,20 @@ Dashboard
 @endsection
 
 @section('content')
-{{-- <div class="row">
-    
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box bg-aqua">
-        <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Waktu Saat Ini</span>
-          <span class="info-box-number" id="valWaktuSaatIni"></span>
-        </div>
-        <!-- /.info-box-content -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">Grafik Tidak Absen</h3>
       </div>
-      <!-- /.info-box -->
-    </div>
-
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box bg-green">
-        <span class="info-box-icon"><i class="fa fa-sign-in"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Berangkat</span>
-          <span class="info-box-number">{{$absensisTodayBerangkat ? helper()->tanggalWaktuIndo($absensisTodayBerangkat->waktu) : null}}</span>
+      <div class="box-body">
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="chartIjinAbsensi"></canvas>
         </div>
-        <!-- /.info-box-content -->
       </div>
-      <!-- /.info-box -->
     </div>
-
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box bg-orange">
-        <span class="info-box-icon"><i class="fa fa-sign-out"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Pulang</span>
-          <span class="info-box-number">{{$absensisTodayPulang ? helper()->tanggalWaktuIndo($absensisTodayPulang->waktu) : null}}</span>
-        </div>
-        <!-- /.info-box-content -->
-      </div>
-      <!-- /.info-box -->
-    </div>
-
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box bg-red">
-        <span class="info-box-icon"><i class="fa fa-window-close"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Absen (Bulan Ini)</span>
-          <span class="info-box-number">{{helper()->ribuan(123123)}}X</span>
-        </div>
-        <!-- /.info-box-content -->
-      </div>
-      <!-- /.info-box -->
-    </div>
-
-</div> --}}
+  </div>
+</div>
 
 <div class="row">
 
@@ -193,5 +152,99 @@ Dashboard
         updateWaktu();
         setInterval(updateWaktu, 1000);
     });
+</script>
+
+<script type="text/javascript">
+var data = {
+      labels: [
+      
+      @php
+      for ($i=0; $i <= 11; $i++) {
+            $array[] = helper()->tanggalIndoStringBulanTahun(date("m-Y", strtotime("-" . $i . " months")));
+      }
+      foreach (array_reverse($array) as $item) {
+            echo '"'.$item.'",';
+       }
+       unset($array);
+      @endphp
+      ],
+      datasets: [
+            {
+                  label: "Sakit",
+                  fillColor: "rgba(220,220,220,0.2)",
+                  strokeColor: "rgba(220,220,220,1)",
+                  pointColor: "rgba(220,220,220,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: [
+                  @php
+                  for ($i=0; $i <= 11; $i++) {
+                        $bulan = explode('-', date("m-Y", strtotime("-" . $i . " months")))[0];
+                        $tahun = explode('-', date("m-Y", strtotime("-" . $i . " months")))[1];
+                        $array[] = helper()->tidakMasuk(getUserData()->pegawai->id, $bulan, $tahun, 's');            
+                  }
+                  foreach (array_reverse($array) as $item) {
+                        echo '"'.$item.'",';
+                   }
+                   unset($array);
+                  @endphp
+                  ]
+            },
+            {
+                  label: "Ijin",
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  data: [
+                  @php
+                  for ($i=0; $i <= 11; $i++) {
+                        $bulan = explode('-', date("m-Y", strtotime("-" . $i . " months")))[0];
+                        $tahun = explode('-', date("m-Y", strtotime("-" . $i . " months")))[1];
+                        $array[] = helper()->tidakMasuk(getUserData()->pegawai->id, $bulan, $tahun, 'i');
+                  }
+                  foreach (array_reverse($array) as $item) {
+                        echo '"'.$item.'",';
+                   }
+                   unset($array);
+                  @endphp
+                  ]
+            },
+            {
+                  label: "Cuti",
+                  fillColor: "rgba(100,110,120,0.2)",
+                  strokeColor: "rgba(100,110,120,1)",
+                  pointColor: "rgba(100,110,120,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(100,110,120,1)",
+                  data: [
+                  @php
+                  for ($i=0; $i <= 11; $i++) {
+                        $bulan = explode('-', date("m-Y", strtotime("-" . $i . " months")))[0];
+                        $tahun = explode('-', date("m-Y", strtotime("-" . $i . " months")))[1];
+                        $array[] = helper()->tidakMasuk(getUserData()->pegawai->id, $bulan, $tahun, 'c');            
+                  }
+                  foreach (array_reverse($array) as $item) {
+                        echo '"'.$item.'",';
+                   }
+                   unset($array);
+                  @endphp
+                  ]
+            }
+      ]
+};
+var ctxl = $("#chartIjinAbsensi").get(0).getContext("2d");
+var lineChart = new Chart(ctxl).Line(data, {
+ responsive : true,
+ animation: true,
+ barValueSpacing : 5,
+ barDatasetSpacing : 1,
+ tooltipFillColor: "rgba(0,0,0,0.8)",                
+ multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"
+});
 </script>
 @endsection
