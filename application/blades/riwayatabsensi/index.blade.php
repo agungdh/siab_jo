@@ -108,7 +108,9 @@ Riwayat Absensi
 
     </div>
     <div class="modal-footer">
+      @if(getUserData()->level == 'a')
       <button type="button" class="btn btn-danger" onclick="hapus()">Hapus</button>
+      @endif
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
   </div>
