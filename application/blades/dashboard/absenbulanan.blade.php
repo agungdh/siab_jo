@@ -33,34 +33,8 @@
 			<td>{{$item->golongan->golongan}}/{{$item->golongan->ruang}} {{$item->golongan->pangkat}}</td>
             <td>{{$item->eselon ? $item->eselon->eselon : '-'}}</td>
 			<td>{{$item->jabatan}}</td>
-			@php
-			$terlambat = DB()
-							->table('absensi')
-							->where('id_pegawai', $item->id)
-							->where('tipe', 'b')
-							->whereNull('invalidated')
-							->whereRaw('TIME(waktu) > ?
-										AND MONTH(waktu) = ?
-										AND YEAR(waktu) = ?',
-										[
-											getenv('WAKTU_BERANGKAT'),
-											$bulan,
-											$tahun,
-										])
-							->get();
-			
-			$durasiTerlambat = 0;
-			foreach ($terlambat as $itemTerlambat) {
-				$harus = helper()->convertJamMenitKeMenit(env('WAKTU_BERANGKAT'));
-				$berangkat = helper()->convertJamMenitKeMenit(date('H:i', strtotime($itemTerlambat->waktu)));
-
-				if ($berangkat > $harus) {
-					$durasiTerlambat += abs($harus - $berangkat);
-				}
-			}
-			@endphp
-			<td>{{$durasiTerlambat}} Menit</td>
-			<td>{{$i}}</td>
+			<td>{{helper()->tidakSesuaiWaktu($item->id, $bulan, $tahun) ?: '-'}}</td>
+			<td>{{helper()->tidakSesuaiWaktu($item->id, $bulan, $tahun, false) ?: '-'}}</td>
 			<td>{{$i}}</td>
 			<td>{{$i}}</td>
 			<td>{{$i}}</td>

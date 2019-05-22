@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "agungdh/pustaka",
-            "version": "1.0.15",
+            "version": "1.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/agungdh/pustaka.git",
-                "reference": "dc5e4995a0df869f76a68aee84eebfb59641ce87"
+                "reference": "8da83b9ae0812ca7e585d0e9f6cf24250126ddb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/agungdh/pustaka/zipball/dc5e4995a0df869f76a68aee84eebfb59641ce87",
-                "reference": "dc5e4995a0df869f76a68aee84eebfb59641ce87",
+                "url": "https://api.github.com/repos/agungdh/pustaka/zipball/8da83b9ae0812ca7e585d0e9f6cf24250126ddb6",
+                "reference": "8da83b9ae0812ca7e585d0e9f6cf24250126ddb6",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 }
             ],
             "description": "Collection of libraries commonly used in developing web applications by AgungDH",
-            "time": "2019-05-22T02:15:11+00:00"
+            "time": "2019-05-22T02:28:13+00:00"
         },
         {
             "name": "doctrine/inflector",

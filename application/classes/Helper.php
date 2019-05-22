@@ -8,6 +8,39 @@ use application\eloquents\IjinAbsensi as IjinAbsensi_model;
 
 class Helper extends \agungdh\Pustaka
 {
+	public static function tidakSesuaiWaktu($id_pegawai, $bulan, $tahun, $terlambat = true)
+	{
+		$pembanding = $terlambat ? '>' : '<';
+		$tsw = DB()
+					->table('absensi')
+					->where('id_pegawai', $id_pegawai)
+					->where('tipe', $terlambat ? 'b' : 'p')
+					->whereNull('invalidated')
+					->whereRaw('TIME(waktu) ' . $pembanding . ' ?
+								AND MONTH(waktu) = ?
+								AND YEAR(waktu) = ?',
+								[
+									$terlambat ? getenv('WAKTU_BERANGKAT') : getenv('WAKTU_PULANG'),
+									$bulan,
+									$tahun,
+								])
+					->get();
+					
+		$durasi = 0;
+		foreach ($tsw as $item) {
+			$harus = helper()->convertJamMenitKeMenit($terlambat ? getenv('WAKTU_BERANGKAT') : getenv('WAKTU_PULANG'));
+			$waktuAbsensi = helper()->convertJamMenitKeMenit(date('H:i', strtotime($item->waktu)));
+
+			if ($terlambat && $waktuAbsensi > $harus) {
+				$durasi += abs($harus - $waktuAbsensi);
+			} elseif (!$terlambat && $waktuAbsensi < $harus) {
+				$durasi += abs($harus - $waktuAbsensi);
+			}
+		}
+
+		return self::parsedMenitKeJamMenit($durasi);
+	}
+
 	public static function apakahHariIniIjin()
 	{
 		$ia = IjinAbsensi_model::where(['id_pegawai' => getUserData()->pegawai->id, 'tanggal' => date('Y-m-d')])->first();

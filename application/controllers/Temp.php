@@ -16,7 +16,6 @@ class Temp extends CI_Controller {
 
 	public function reportbulanan()
 	{
-		dd(helper()->menitKeJamMenit(230));
 		$bulan = 5;
 		$tahun = 2019;
 		$pegawais = Pegawai_model::with([
