@@ -106,7 +106,7 @@ if(ci()->session->login) {
     <!-- Logo -->
     <a href="{{ base_url() }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>AB</b></span>
+      <span class="logo-mini"><b>{{getenv('APP_TITLE_SHORTER')}}</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>{{getenv('APP_TITLE_SHORT')}}</b></span>
     </a>
