@@ -5,9 +5,38 @@ use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\HariLibur as HariLibur_model;
 use application\eloquents\User as User_model;
 use application\eloquents\IjinAbsensi as IjinAbsensi_model;
+use application\eloquents\Absensi as Absensi_model;
 
 class Helper extends \agungdh\Pustaka
 {
+	public static function semuaTanggalPadaBulanTahun($bulan, $tahun)
+	{
+		$tanggals = DB::select('
+					SELECT date_field
+					FROM
+					(
+					    SELECT
+					        MAKEDATE(?,1) +
+					        INTERVAL (?-1) MONTH +
+					        INTERVAL daynum DAY date_field
+					    FROM
+					    (
+					        SELECT t*10+u daynum
+					        FROM
+					            (SELECT 0 t UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) A,
+					            (SELECT 0 u UNION SELECT 1 UNION SELECT 2 UNION SELECT 3
+					            UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7
+					            UNION SELECT 8 UNION SELECT 9) B
+					        ORDER BY daynum
+					    ) AA
+					) AAA
+					WHERE MONTH(date_field) = ?
+					ORDER BY date_field ASC
+			', [$tahun, $bulan, $bulan]);
+
+		return $tanggals;
+	}
+
 	public static function tidakMasuk($id_pegawai, $bulan, $tahun, $tipe)
 	{
 		$ia = IjinAbsensi_model::whereRaw('MONTH(tanggal) = ? AND YEAR(tanggal) = ?', [$bulan, $tahun])
@@ -21,9 +50,7 @@ class Helper extends \agungdh\Pustaka
 	public static function tidakSesuaiWaktu($id_pegawai, $bulan, $tahun, $terlambat = true)
 	{
 		$pembanding = $terlambat ? '>' : '<';
-		$tsw = DB()
-					->table('absensi')
-					->where('id_pegawai', $id_pegawai)
+		$tsw = Absensi_model::where('id_pegawai', $id_pegawai)
 					->where('tipe', $terlambat ? 'b' : 'p')
 					->whereNull('invalidated')
 					->whereRaw('TIME(waktu) ' . $pembanding . ' ?

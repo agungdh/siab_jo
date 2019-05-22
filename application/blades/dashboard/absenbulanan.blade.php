@@ -39,7 +39,7 @@
 			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 's') ?: '-'}}</td>
 			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'i') ?: '-'}}</td>
 			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'c') ?: '-'}}</td>
-			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'c') ?: '-'}}</td>
+			<td>s</td>
 		</tr>
 		@endforeach
 	</tbody>
