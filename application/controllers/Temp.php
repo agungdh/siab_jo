@@ -20,67 +20,6 @@ class Temp extends CI_Controller {
 		$tahun = 2019;
 		$idPegawai = 1;
 
-		$tempHariLiburs = DB::select('SELECT tanggal
-					                        FROM hari_libur
-					                        WHERE MONTH(tanggal) = ?
-											AND YEAR(tanggal) = ?', [$bulan, $tahun]);
-		$hariLiburs = [];
-		foreach ($tempHariLiburs as $item) {
-			$hariLiburs[] = $item->tanggal;
-		}
-		unset($tempHariLiburs);
-
-		$tempSemuaTanggalPadaBulanTahun = helper()->semuaTanggalPadaBulanTahun($bulan, $tahun);
-		$semuaTanggalPadaBulanTahun = [];
-		foreach ($tempSemuaTanggalPadaBulanTahun as $item) {
-			$numDay = date('N', strtotime($item->date_field));
-
-			if ($numDay != 6 && $numDay != 7 && !in_array($item->date_field, $hariLiburs)) {
-				$semuaTanggalPadaBulanTahun[] = $item->date_field;
-			}
-		}
-		unset($tempSemuaTanggalPadaBulanTahun);
-
-		$hariKerjaString = '';
-		$absensis = Absensi_model::where('id_pegawai', $idPegawai)
-									// ->where('tipe', 'b')
-									->whereRaw('MONTH(waktu) = ?
-											AND YEAR(waktu) = ?', [$bulan, $tahun])
-									->whereNull('invalidated');
-		if (count($semuaTanggalPadaBulanTahun) > 0) {
-			$tempStringSemuaTanggalPadaBulanTahun = '';
-			foreach ($semuaTanggalPadaBulanTahun as $item) {
-				$tempStringSemuaTanggalPadaBulanTahun .= "'" . $item . "'" . ',';
-			}
-			$stringSemuaTanggalPadaBulanTahun = rtrim($tempStringSemuaTanggalPadaBulanTahun, ',');
-			$absensis = $absensis->whereRaw('DATE(waktu) in (' . $stringSemuaTanggalPadaBulanTahun . ')');
-		}
-		$absensis = $absensis->get();
-		dd($absensis);
-		// echo $absensis; die;
-
-		// dd(compact(['semuaTanggalPadaBulanTahun']));
-
-		// $tanggalAbsens = DB::select('SELECT DISTINCT(DATE(waktu)) tanggal
-		// 							FROM absensi
-		// 							WHERE id_pegawai = ?
-		// 							AND MONTH(waktu) = ?
-		// 							AND YEAR(waktu) = ?
-		// 							AND invalidated IS null
-		// 							AND DATE(waktu) NOT IN (SELECT tanggal
-		// 							                        FROM hari_libur
-		// 							                        WHERE MONTH(tanggal) = ?
-		// 													AND YEAR(tanggal) = ?)', [$idPegawai, $bulan, $tahun, $bulan, $tahun]);
-		// foreach ($tanggalAbsens as $item) {
-		// 	$inTanggalLibur[] = $item->tanggal;	
-		// }
-
-		// Absensi_model::whereRaw('MONTH(waktu) = ?
-		// 						AND YEAR(waktu) = ?', [$bulan, $tahun])
-		// 				->where('id_pegawai', $idPegawai)
-		// 				->whereNull('invalidated')
-		// dd($inTanggalLibur);
-
 		$pegawais = Pegawai_model::with([
 			'golongan', 
 			'eselon',

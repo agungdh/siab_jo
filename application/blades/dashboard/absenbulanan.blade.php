@@ -39,7 +39,7 @@
 			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 's') ?: '-'}}</td>
 			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'i') ?: '-'}}</td>
 			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'c') ?: '-'}}</td>
-			<td>s</td>
+			<td>{{helper()->jumlahGakAbsen($item->id, $bulan, $tahun)}}</td>
 		</tr>
 		@endforeach
 	</tbody>

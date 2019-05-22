@@ -9,6 +9,58 @@ use application\eloquents\Absensi as Absensi_model;
 
 class Helper extends \agungdh\Pustaka
 {
+	public static function jumlahGakAbsen($idPegawai, $bulan, $tahun)
+	{
+		$gakAbsenB = self::gakAbsen($idPegawai, $bulan, $tahun, 'b');
+		$gakAbsenP = self::gakAbsen($idPegawai, $bulan, $tahun, 'p');
+
+		return $gakAbsenB + $gakAbsenP;
+	}
+
+	public static function gakAbsen($idPegawai, $bulan, $tahun, $tipe)
+	{
+		$tempHariLiburs = DB::select('SELECT tanggal
+					                        FROM hari_libur
+					                        WHERE MONTH(tanggal) = ?
+											AND YEAR(tanggal) = ?', [$bulan, $tahun]);
+		$hariLiburs = [];
+		foreach ($tempHariLiburs as $item) {
+			$hariLiburs[] = $item->tanggal;
+		}
+		unset($tempHariLiburs);
+
+		$tempSemuaTanggalPadaBulanTahun = helper()->semuaTanggalPadaBulanTahun($bulan, $tahun);
+		$semuaTanggalPadaBulanTahun = [];
+		foreach ($tempSemuaTanggalPadaBulanTahun as $item) {
+			$numDay = date('N', strtotime($item->date_field));
+
+			if ($numDay != 6 && $numDay != 7 && !in_array($item->date_field, $hariLiburs)) {
+				$semuaTanggalPadaBulanTahun[] = $item->date_field;
+			}
+		}
+		unset($tempSemuaTanggalPadaBulanTahun);
+
+		$hariKerjaString = '';
+		$absensis = Absensi_model::where('id_pegawai', $idPegawai)
+									->where('tipe', $tipe)
+									->whereRaw('MONTH(waktu) = ?
+											AND YEAR(waktu) = ?', [$bulan, $tahun])
+									->whereNull('invalidated');
+		if (count($semuaTanggalPadaBulanTahun) > 0) {
+			$tempStringSemuaTanggalPadaBulanTahun = '';
+			foreach ($semuaTanggalPadaBulanTahun as $item) {
+				$tempStringSemuaTanggalPadaBulanTahun .= "'" . $item . "'" . ',';
+			}
+			$stringSemuaTanggalPadaBulanTahun = rtrim($tempStringSemuaTanggalPadaBulanTahun, ',');
+			$absensis = $absensis->whereRaw('DATE(waktu) in (' . $stringSemuaTanggalPadaBulanTahun . ')');
+		}
+		$absensis = $absensis->get();
+
+		$jumlahGakAbsen = abs(count($semuaTanggalPadaBulanTahun) - count($absensis));
+
+		return $jumlahGakAbsen;
+	}
+
 	public static function semuaTanggalPadaBulanTahun($bulan, $tahun)
 	{
 		$tanggals = DB::select('
