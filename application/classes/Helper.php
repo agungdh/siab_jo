@@ -8,6 +8,16 @@ use application\eloquents\IjinAbsensi as IjinAbsensi_model;
 
 class Helper extends \agungdh\Pustaka
 {
+	public static function tidakMasuk($id_pegawai, $bulan, $tahun, $tipe)
+	{
+		$ia = IjinAbsensi_model::whereRaw('MONTH(tanggal) = ? AND YEAR(tanggal) = ?', [$bulan, $tahun])
+									->where('tipe', $tipe)
+									->where('id_pegawai', $id_pegawai)
+									->count();
+
+		return $ia;
+	}
+
 	public static function tidakSesuaiWaktu($id_pegawai, $bulan, $tahun, $terlambat = true)
 	{
 		$pembanding = $terlambat ? '>' : '<';
@@ -25,7 +35,7 @@ class Helper extends \agungdh\Pustaka
 									$tahun,
 								])
 					->get();
-					
+
 		$durasi = 0;
 		foreach ($tsw as $item) {
 			$harus = helper()->convertJamMenitKeMenit($terlambat ? getenv('WAKTU_BERANGKAT') : getenv('WAKTU_PULANG'));

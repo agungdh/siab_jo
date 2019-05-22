@@ -17,6 +17,7 @@
 			<th>TERLAMBAT</th>
 			<th>PULANG CEPAT</th>
 			<th>SAKIT</th>
+			<th>IJIN</th>
 			<th>CUTI</th>
 			<th>TIDAK ABSEN</th>
 		</tr>
@@ -35,9 +36,10 @@
 			<td>{{$item->jabatan}}</td>
 			<td>{{helper()->tidakSesuaiWaktu($item->id, $bulan, $tahun) ?: '-'}}</td>
 			<td>{{helper()->tidakSesuaiWaktu($item->id, $bulan, $tahun, false) ?: '-'}}</td>
-			<td>{{$i}}</td>
-			<td>{{$i}}</td>
-			<td>{{$i}}</td>
+			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 's') ?: '-'}}</td>
+			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'i') ?: '-'}}</td>
+			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'c') ?: '-'}}</td>
+			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'c') ?: '-'}}</td>
 		</tr>
 		@endforeach
 	</tbody>
