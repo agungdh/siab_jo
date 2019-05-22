@@ -16,15 +16,7 @@ class Temp extends CI_Controller {
 
 	public function reportbulanan()
 	{
-		// $waktuPulang = str_replace(':', '', env('WAKTU_PULANG'));
-		// dd([
-		// 	abs(
-		// 		(int)str_replace(':', '', env('WAKTU_PULANG'))
-		// 		- 
-		// 		(int)str_replace(':', '', env('WAKTU_BERANGKAT'))
-		// 	)
-		// ]);
-		// dd(abs(helper()->convertJamMenitKeMenit('08:00') - helper()->convertJamMenitKeMenit('16:00')));
+		dd(helper()->menitKeJamMenit(230));
 		$bulan = 5;
 		$tahun = 2019;
 		$pegawais = Pegawai_model::with([
