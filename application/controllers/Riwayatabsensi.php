@@ -22,7 +22,7 @@ class Riwayatabsensi extends CI_Controller {
 		return blade('riwayatabsensi.index', compact(['pegawais', 'userData']));
 	}
 
-	public function getDataAbsensi($id_pegawai = "0", $tanggal = "0", $sampai = "0")
+	public function getDataAbsensi($id_pegawai = "0", $tanggal = "0", $sampai = "0", $validity = "1")
 	{
 		$datas = new Absensi_model();
 		$datas = $datas->with('pegawai');
@@ -45,6 +45,12 @@ class Riwayatabsensi extends CI_Controller {
 			$sampai = helper()->parseTanggalIndo($sampai);
 
 			$datas = $datas->whereRaw('date(waktu) <= CAST(? AS DATE)', $sampai);
+		}
+
+		if ($validity == '0') {
+			$datas = $datas->whereNotNull('invalidated');
+		} elseif ($validity == '1') {
+			$datas = $datas->whereNull('invalidated');
 		}
 
 		$datas = $datas->get();

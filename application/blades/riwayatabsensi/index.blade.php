@@ -16,7 +16,7 @@ Riwayat Absensi
 
       <div class="box box-body">
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-group has-feedback">
             <label for="id_pegawai">Pegawai</label>
             <select class="form-control select2" name="id_pegawai" id="id_pegawai">
@@ -32,14 +32,24 @@ Riwayat Absensi
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
+          <div class="form-group has-feedback">
+            <label for="validity">Validity</label>
+            <select class="form-control select2" name="validity" id="validity">
+              <option value="1">Valid</option>
+              <option value="0">Invalid</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
           <div class="form-group has-feedback">
             <label for="tanggal">Tanggal</label>
             <input autocomplete="off" type="text" name="tanggal" id="tanggal" class="form-control datepicker">
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-group has-feedback">
             <label for="sampai">Sampai</label>
             <input autocomplete="off" type="text" name="sampai" id="sampai" class="form-control datepicker">
@@ -145,10 +155,11 @@ Riwayat Absensi
     var id_pegawai = $("#id_pegawai").val();
     var tanggal = $("#tanggal").val() == '' ? 0 : $("#tanggal").val();
     var sampai = $("#sampai").val() == '' ? 0 : $("#sampai").val();
+    var validity = $("#validity").val();
 
     $.ajax({
       type: "GET",
-      url: `{{base_url()}}riwayatabsensi/getDataAbsensi/${id_pegawai}/${tanggal}/${sampai}`,
+      url: `{{base_url()}}riwayatabsensi/getDataAbsensi/${id_pegawai}/${tanggal}/${sampai}/${validity}`,
       data: {
         
       },

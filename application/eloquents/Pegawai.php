@@ -8,7 +8,7 @@ class Pegawai extends Eloquent {
     public $timestamps = false;
 
     public function absensis(){
-    	return $this->hasMany('application\eloquents\Absensi', 'id_pegawai');
+    	return $this->hasMany('application\eloquents\Absensi', 'id_pegawai')->whereNull('invalidated');
     }
 
     public function user(){
