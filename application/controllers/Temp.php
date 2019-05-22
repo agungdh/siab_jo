@@ -41,7 +41,25 @@ class Temp extends CI_Controller {
 		}
 		unset($tempSemuaTanggalPadaBulanTahun);
 
-		dd(compact(['semuaTanggalPadaBulanTahun', 'hariLiburs']));
+		$hariKerjaString = '';
+		$absensis = Absensi_model::where('id_pegawai', $idPegawai)
+									// ->where('tipe', 'b')
+									->whereRaw('MONTH(waktu) = ?
+											AND YEAR(waktu) = ?', [$bulan, $tahun])
+									->whereNull('invalidated');
+		if (count($semuaTanggalPadaBulanTahun) > 0) {
+			$tempStringSemuaTanggalPadaBulanTahun = '';
+			foreach ($semuaTanggalPadaBulanTahun as $item) {
+				$tempStringSemuaTanggalPadaBulanTahun .= "'" . $item . "'" . ',';
+			}
+			$stringSemuaTanggalPadaBulanTahun = rtrim($tempStringSemuaTanggalPadaBulanTahun, ',');
+			$absensis = $absensis->whereRaw('DATE(waktu) in (' . $stringSemuaTanggalPadaBulanTahun . ')');
+		}
+		$absensis = $absensis->get();
+		dd($absensis);
+		// echo $absensis; die;
+
+		// dd(compact(['semuaTanggalPadaBulanTahun']));
 
 		// $tanggalAbsens = DB::select('SELECT DISTINCT(DATE(waktu)) tanggal
 		// 							FROM absensi
