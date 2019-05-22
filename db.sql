@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: siab_jo
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Tue, 21 May 2019 08:29:00 +0200
+-- Date: Wed, 22 May 2019 08:26:05 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,10 +30,11 @@ CREATE TABLE `absensi` (
   `lat` varchar(191) NOT NULL,
   `lng` varchar(191) NOT NULL,
   `lokasi` enum('d','l') NOT NULL COMMENT 'd => dalam,l => luar',
+  `invalidated` enum('y') DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_pegawai` (`id_pegawai`),
   CONSTRAINT `absensi_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,11 +44,12 @@ CREATE TABLE `absensi` (
 LOCK TABLES `absensi` WRITE;
 /*!40000 ALTER TABLE `absensi` DISABLE KEYS */;
 SET autocommit=0;
+INSERT INTO `absensi` VALUES (8,1,'2019-05-21 08:00:39','b','-5.0933185','105.2840418','l',NULL),(9,1,'2019-05-22 09:55:59','p','4','2','l',NULL),(11,5,'2019-05-22 12:49:29','b','-5.0932153','105.28398059999999','l',NULL);
 /*!40000 ALTER TABLE `absensi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `absensi` with 0 row(s)
+-- Dumped table `absensi` with 3 row(s)
 --
 
 --
@@ -120,7 +122,7 @@ CREATE TABLE `hari_libur` (
   `keterangan` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tanggal` (`tanggal`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +155,7 @@ CREATE TABLE `ijin_absensi` (
   PRIMARY KEY (`id`),
   KEY `id_pegawai` (`id_pegawai`),
   CONSTRAINT `ijin_absensi_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,11 +165,12 @@ CREATE TABLE `ijin_absensi` (
 LOCK TABLES `ijin_absensi` WRITE;
 /*!40000 ALTER TABLE `ijin_absensi` DISABLE KEYS */;
 SET autocommit=0;
+INSERT INTO `ijin_absensi` VALUES (4,1,'c','2019-05-28',NULL);
 /*!40000 ALTER TABLE `ijin_absensi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `ijin_absensi` with 0 row(s)
+-- Dumped table `ijin_absensi` with 1 row(s)
 --
 
 --
@@ -248,4 +251,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Tue, 21 May 2019 08:29:00 +0200
+-- Dump completed on: Wed, 22 May 2019 08:26:05 +0200
